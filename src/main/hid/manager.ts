@@ -92,11 +92,22 @@ export class DeviceManager extends EventEmitter {
 
   async rescan(): Promise<void> { this.lastSignature = ''; this.failedSignatures.clear(); await this.scan(true); }
 
+  /**
+   * Picks between models with the same USB ids (S75 Pro, L99) when the product name does not say,
+   * as on the 2.4 GHz dongle ("2.4G Dongle"): the app chooses the one the user has set up.
+   */
+  pickShared: (candidates: DeviceModel[]) => DeviceModel = (c) => c[0];
+
   private groups(devices: Device[]): Map<string, { model: DeviceModel; devices: Device[] }> {
     const out = new Map<string, { model: DeviceModel; devices: Device[] }>();
-    for (const model of MODELS) {
-      const mine = devices.filter((d) => model.usb.some((u) => u.vendorId === d.vendorId && u.productId === d.productId));
-      if (mine.length) out.set(model.id, { model, devices: mine });
+    for (const d of devices) {
+      const candidates = MODELS.filter((model) => model.usb.some((u) => u.vendorId === d.vendorId && u.productId === d.productId));
+      if (!candidates.length) continue;
+      const named = candidates.filter((model) => model.productMatch && new RegExp(model.productMatch, 'i').test(d.product ?? ''));
+      const model = named.length === 1 ? named[0] : candidates.length === 1 ? candidates[0] : this.pickShared(candidates);
+      const g = out.get(model.id) ?? { model, devices: [] };
+      g.devices.push(d);
+      out.set(model.id, g);
     }
     return out;
   }

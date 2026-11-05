@@ -95,6 +95,8 @@ export interface DeviceModel {
   barModes?: { mode: number; name: string }[];
   /** Regex for the Bluetooth device name. */
   bluetoothName?: string;
+  /** Regex for the USB product name, for models that share USB ids with another one. */
+  productMatch?: string;
   /** Swappable batteries in the box. */
   batteries?: number;
   lightRange?: { brightness: number; speed: number };

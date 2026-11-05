@@ -378,7 +378,7 @@ export class Aula04Driver implements Driver {
   /** Uploads frames (RGB565) to the TFT. USB only. */
   uploadScreen(frames: ScreenFrame[], slot = 1): Promise<void> {
     return this.port.exclusive(async () => {
-      if (!this.model.screen) throw new Error('No screen on this model');
+      if (!this.model.screen || !this.model.features.screen) throw new Error('No screen on this model');
       if (this.link !== 'usb') throw new Error('The screen can only be updated over USB');
       if (this.screenBusy) throw new Error('Screen upload already running');
       this.screenBusy = true;

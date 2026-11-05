@@ -70,6 +70,11 @@ async function applyVendorBlock(): Promise<void> {
   } catch { /* best effort */ } finally { vendorBusy = false; }
 }
 manager.watchPaused = () => vendorRunning;
+// Same USB ids, no telling name (the dongle): the model the user has set up, the S75 Pro if both or none.
+manager.pickShared = (c) => {
+  const known = c.filter((m) => prefs?.knownDevices?.includes(m.id));
+  return known.length === 1 ? known[0] : c[0];
+};
 
 async function setVendorExes(enable: boolean): Promise<'unchanged' | 'done' | 'declined'> {
   const r = await vendor.setVendorExecutables(enable);
