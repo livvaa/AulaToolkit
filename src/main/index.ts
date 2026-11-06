@@ -234,7 +234,9 @@ function createFlyout(): void {
     alwaysOnTop: true,
     hasShadow: false,
     backgroundColor: '#00000000',
-    webPreferences: { preload: join(__dirname, '../preload/index.js'), sandbox: false, contextIsolation: true },
+    // Kept rendering while hidden: otherwise Chromium pauses it, and on hover it showed up empty and at
+    // its last (tiny) size before it had painted.
+    webPreferences: { preload: join(__dirname, '../preload/index.js'), sandbox: false, contextIsolation: true, backgroundThrottling: false },
   });
   flyout.setIgnoreMouseEvents(true);
   const r = rendererUrl('flyout');
@@ -259,17 +261,31 @@ function positionFlyout(): void {
   flyout.setBounds({ x, y, width, height });
 }
 
+let flyoutWatch: NodeJS.Timeout | null = null;
+let trayMoveAt = 0;
+
 function showFlyout(): void {
+  trayMoveAt = Date.now();
   if (!flyout || flyout.isDestroyed()) createFlyout();
   if (flyoutHideTimer) { clearTimeout(flyoutHideTimer); flyoutHideTimer = null; }
   positionFlyout();
-  flyout!.webContents.send(CH.FLYOUT_REFRESH);
+  if (!flyout!.isVisible()) flyout!.webContents.send(CH.FLYOUT_REFRESH);
   flyout!.showInactive();
+  // Windows does not always send mouse-leave for tray icons: hide once the cursor is off the icon.
+  if (!flyoutWatch) flyoutWatch = setInterval(() => {
+    const b = tray?.getBounds(), c = screen.getCursorScreenPoint();
+    const over = !!b && c.x >= b.x && c.x < b.x + b.width && c.y >= b.y && c.y < b.y + b.height;
+    // the icon's bounds can be off (overflow area): also wait for the tray's own mouse moves to stop
+    if (!over && Date.now() - trayMoveAt > 500) hideFlyoutSoon();
+  }, 300);
 }
 
 function hideFlyoutSoon(): void {
   if (flyoutHideTimer) clearTimeout(flyoutHideTimer);
-  flyoutHideTimer = setTimeout(() => { if (flyout && !flyout.isDestroyed()) flyout.hide(); }, 250);
+  flyoutHideTimer = setTimeout(() => {
+    if (flyout && !flyout.isDestroyed()) flyout.hide();
+    if (flyoutWatch) { clearInterval(flyoutWatch); flyoutWatch = null; }
+  }, 250);
 }
 
 function createTray(): void {
@@ -509,6 +525,7 @@ function registerIpc(): void {
   }, (message) => manager.addLog('!', message)));
   ipcMain.on(CH.OSD_SHOW, (_e, p: OsdPayload) => { if (prefs.osd) showOsd(p); });
   ipcMain.on(CH.FLYOUT_SIZE, (_e, h: number) => {
+    if (h < 40) return; // not laid out yet
     flyoutHeight = Math.max(60, Math.min(720, Math.round(h)));
     if (flyout && !flyout.isDestroyed() && flyout.isVisible()) positionFlyout();
   });
