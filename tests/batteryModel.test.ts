@@ -125,3 +125,17 @@ describe('health from charge speed', () => {
     expect(r.progress.healthSessions).toBe(6);
   });
 });
+
+describe('voltage bounce is not a charge (real logs, 6 Nov)', () => {
+  // The mouse on Bluetooth goes 57 <-> 62 at rest, the keyboard climbs a few points after resting or
+  // unplugging. Neither was charging, but both showed "charging" and a charge time of days.
+  for (const [f, link] of [['sc900', 'bluetooth'], ['s75pro', '2.4g']] as const) {
+    it(f, () => {
+      const obs = migrate(JSON.parse(readFileSync(join(__dirname, 'fixtures', `${f}-battery-v2.json`), 'utf8')));
+      const last = obs.filter((o) => o.pct !== null).at(-1)!;
+      const r = analyse(obs, obs.at(-1)!.t + 60e3, { pct: last.pct, at: last.t, link, charging: false, asleep: false });
+      expect(r.level?.charging).toBe(false);
+      if (r.chargeMinutes) expect(r.chargeMinutes.value).toBeLessThan(12 * 60);
+    });
+  }
+});

@@ -1,6 +1,7 @@
 // Battery guesses from our own log. The devices only report whole %, so it's all from when the level
 // changes. Readings more than GAP_MS apart = gap (app closed, PC asleep). Charging = device flag, usb
-// cable, or the level going up 2+ steps. Health = charge speed now vs the first charges (15-85 % part).
+// cable, or the level going up 10+ points (the levels are voltage based and bounce back up to ~5 points
+// after resting or unplugging). Health = charge speed now vs the first charges (15-85 % part).
 // Ranges are rough.
 
 import type { Link } from './types';
@@ -43,6 +44,8 @@ const CHARGE_MIN_STEPS = 10;
 const HEALTH_SESSIONS = 6, HEALTH_MIN_SPAN = 30 * 86400e3;
 const CC_LO = 15, CC_HI = 85; // CC part of the charge
 const ASSUME_FULL_AFTER = 3 * 3600e3; // on the cable this long without a known charge speed -> call it full
+const RISE_PTS = 10; // a charge without a flag: the level this far above its low
+const STALL_MS = 20 * 60e3; // ...and it ends once the level stops rising for this long
 
 const relErr = (steps: number): number => Math.max(0.1, 1.28 / Math.sqrt(Math.max(1, steps)));
 const est = (value: number, e: number): Estimate => ({ value, lo: value * (1 - e), hi: value * (1 + e) });
@@ -50,7 +53,7 @@ const median = (a: number[]): number => { const s = [...a].sort((x, y) => x - y)
 const gcd = (a: number, b: number): number => (b ? gcd(b, a % b) : a);
 
 interface Run { start: number; top: number; min: number; lastT: number; first?: { t: number; from: number }; lastExactDrop?: { t: number; from: number }; lastWasExactDrop: boolean }
-interface Charge { start: number; end: number; from: number | null; to: number | null; readings: [number, number][]; approx: boolean; inferred: boolean }
+interface Charge { start: number; end: number; from: number | null; to: number | null; readings: [number, number][]; approx: boolean; inferred: boolean; lastRise: number }
 
 /** v1 log (array of {t, pct, charging}) to observations */
 export function migrate(raw: unknown): BatteryObs[] {
@@ -63,12 +66,19 @@ export function migrate(raw: unknown): BatteryObs[] {
 }
 
 export function analyse(input: BatteryObs[], now: number, live: LiveState | null): BatteryReport {
-  const obs = input.filter((o) => o.t <= now + 86400e3).sort((a, b) => a.t - b.t);
+  const sorted = input.filter((o) => o.t <= now + 86400e3).sort((a, b) => a.t - b.t);
+  // Windows reports a stale Bluetooth level right after connecting: drop that first reading when the
+  // next one, minutes later, already says something else.
+  const obs = sorted.filter((o, i) => {
+    const prev = sorted[i - 1], next = sorted[i + 1];
+    const first = o.link === 'bluetooth' && (!prev || prev.link !== 'bluetooth' || o.t - prev.t > GAP_MS);
+    return !(first && next && next.link === 'bluetooth' && next.t - o.t <= GAP_MS && next.pct !== o.pct);
+  });
   const known = obs.filter((o) => o.pct !== null) as (BatteryObs & { pct: number })[];
   let q = 0;
   for (let i = 1; i < known.length; i++) q = gcd(q, Math.abs(known[i].pct - known[i - 1].pct));
   q = q || 1;
-  const rise = Math.max(2, 2 * q);
+  const rise = Math.max(RISE_PTS, 4 * q);
   const charging = (o: BatteryObs): boolean => o.chg === 1 || o.link === 'usb';
 
   const runs: Run[] = [];
@@ -91,19 +101,21 @@ export function analyse(input: BatteryObs[], now: number, live: LiveState | null
     if (prev && !gap) observedMs += o.t - prev.t;
     const flagged = charging(o);
     const risen = !flagged && run !== null && o.pct !== null && o.pct >= run.min + rise;
-    // an inferred charge lasts while the level keeps rising
+    // an inferred charge lasts while the level keeps rising (or holds, briefly)
     const peak = charge?.readings.length ? Math.max(...charge.readings.map((r) => r[1])) : null;
-    const stillRising = !flagged && !!charge?.inferred && o.pct !== null && peak !== null && o.pct >= peak;
+    const stillRising = !flagged && !!charge?.inferred && o.pct !== null && peak !== null
+      && (o.pct > peak || (o.pct === peak && o.t - charge.lastRise <= STALL_MS));
 
     if (flagged || risen || stillRising) {
       endUse();
       const before: number | null = run ? run.min : lastPct;
       closeRun();
       if (!charge) {
-        charge = { start: gap || risen ? (prev?.t ?? o.t) : o.t, end: o.t, from: before, to: null, readings: [], approx: gap || risen, inferred: risen };
+        charge = { start: gap || risen ? (prev?.t ?? o.t) : o.t, end: o.t, from: before, to: null, readings: [], approx: gap || risen, inferred: risen, lastRise: o.t };
         if (risen && prev?.pct != null) charge.readings.push([prev.t, prev.pct]);
       }
       if (flagged) charge.inferred = false;
+      if (o.pct !== null && (peak === null || o.pct > peak)) charge.lastRise = o.t;
       charge.end = o.t;
       if (o.pct !== null) charge.readings.push([o.t, o.pct]);
       lastPct = o.pct ?? lastPct;
@@ -219,7 +231,8 @@ export function analyse(input: BatteryObs[], now: number, live: LiveState | null
     const full = guess !== null ? guess >= 100 - q : now - since >= ASSUME_FULL_AFTER;
     level = { pct: guess !== null ? Math.floor(guess) : null, at: now, live: true, charging: true, estimated: true, full };
   } else if (live && level) level = { ...level, live: true }; // asleep: last reading
-  if (level && charge && !level.charging) level = { ...level, charging: true };
+  // still charging by the last readings: a flagged charge, or one seen rising within STALL_MS
+  if (level && charge && !level.charging && (!charge.inferred || now - charge.lastRise <= STALL_MS)) level = { ...level, charging: true };
 
   let remainingHours: Estimate | null = null;
   if (drainPerDay && drainSteps >= REMAIN_MIN_STEPS && level && level.pct !== null && !level.charging) {
