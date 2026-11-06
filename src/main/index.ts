@@ -31,6 +31,7 @@ import { colorKey } from '@shared/lightWatch';
 import * as battery from './battery';
 import * as library from './library';
 import { readBluetoothBatteries } from './bluetoothBattery';
+import { ensureCliOnPath } from './cliPath';
 import { watchDisplayPower } from './displayPower';
 import { setMediaWatch, stopMediaWatch } from './mediaPlayback';
 
@@ -546,6 +547,7 @@ if (!gotLock) {
     applyOsdPrefs(prefs);
     applyAutostart(prefs);
     applyRestartHotkey(prefs);
+    ensureCliOnPath((m) => manager.addLog('i', m));
     battery.setEnabled(true);
     app.on('browser-window-created', (_, window) => optimizer.watchWindowShortcuts(window));
     // system audio for the music rhythm (loopback, no picker)
