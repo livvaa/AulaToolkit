@@ -43,7 +43,7 @@ export const BatteryCard = ({ modelId }: { modelId: string }) => {
   const Stat = ({ label, value, note }: { label: string; value: string; note?: string }) => (
     <div className="flex flex-col min-w-0">
       <dt className="text-[10px] font-semibold uppercase tracking-wider text-muted truncate" title={label}>{label}</dt>
-      <dd className="text-base font-semibold leading-snug truncate" title={value}>{value}</dd>
+      <dd className="text-[15px] font-semibold leading-tight truncate" title={value}>{value}</dd>
       {note && <dd className="text-[11px] text-muted truncate" title={note}>{note}</dd>}
     </div>
   );
@@ -73,7 +73,7 @@ export const BatteryCard = ({ modelId }: { modelId: string }) => {
       ) : undefined}
     >
       <div className="flex gap-6 items-start">
-        <dl className="grid grid-cols-3 gap-x-4 gap-y-3 flex-[3] min-w-0">
+        <dl className="grid grid-cols-3 gap-x-4 gap-y-2 flex-[3] min-w-0">
           <Stat label={t('batteryNow')} value={level} note={levelNote} />
           <Stat label={t('batteryInUse')} value={st.minutesPerPct ? `≈ ${dur(st.minutesPerPct.value)}` : collecting} note={st.minutesPerPct ? range(st.minutesPerPct, dur) : undefined} />
           <Stat label={t('batteryDrain')} value={st.drainPerDay ? `≈ ${pct(st.drainPerDay.value, 1)} / ${t('day')}` : collecting} note={st.drainPerDay ? range(st.drainPerDay, (v) => pct(v, 1)) : undefined} />
@@ -88,10 +88,10 @@ export const BatteryCard = ({ modelId }: { modelId: string }) => {
           <div className="flex-[2] min-w-0">
             <div className="text-[10px] font-semibold uppercase tracking-wider text-muted mb-1 truncate">{t('batteryChartTitle')}</div>
             <div className="flex gap-2">
-              <div className="flex flex-col justify-between text-[10px] text-muted py-0.5" style={{ height: 64 }}>
+              <div className="flex flex-col justify-between text-[10px] text-muted py-0.5" style={{ height: 52 }}>
                 <span>{pct(100)}</span><span>{pct(50)}</span><span>{pct(0)}</span>
               </div>
-              <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="w-full" style={{ height: 64 }}>
+              <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="w-full" style={{ height: 52 }}>
                 {[0, 0.5, 1].map((g) => (
                   <line key={g} x1="0" x2={W} y1={g * H} y2={g * H} stroke="var(--color-line)" strokeWidth="0.5" strokeDasharray="3 3" />
                 ))}
@@ -106,8 +106,10 @@ export const BatteryCard = ({ modelId }: { modelId: string }) => {
           </div>
         )}
       </div>
-      <div className="flex items-center gap-1.5 text-[12px] mt-3" style={{ color: 'var(--color-warn)' }}><AlertTriangle size={13} className="shrink-0" />{t('batteryNoFastCharge')}</div>
-      <div className="text-[11px] text-muted mt-1">{t('batteryDisclaimer')}</div>
+      <div className="flex items-center flex-wrap gap-x-4 gap-y-1 mt-2.5 text-[11px] text-muted">
+        <span className="flex items-center gap-1.5 text-[12px]"><AlertTriangle size={13} className="shrink-0" style={{ color: 'var(--color-warn)' }} />{t('batteryNoFastCharge')}</span>
+        <span>{t('batteryDisclaimer')}</span>
+      </div>
     </Card>
   );
 };

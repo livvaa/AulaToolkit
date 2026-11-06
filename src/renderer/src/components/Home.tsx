@@ -24,16 +24,22 @@ export const Home = () => {
 
   return (
     <div className="p-8 flex flex-col gap-8 fade-in max-w-6xl">
-      <section className="relative overflow-hidden panel glow p-8 flex items-center gap-8">
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(700px 300px at 10% 0%, color-mix(in srgb, var(--color-accent) 30%, transparent), transparent 70%)' }} />
-        <img src={logo} alt="" className="h-20 w-20 relative drop-shadow-2xl" draggable={false} />
-        <div className="relative flex-1">
+      <section className="flex items-center gap-6 pb-6" style={{ borderBottom: '1px solid var(--color-line)' }}>
+        <img src={logo} alt="" className="h-16 w-16" draggable={false} />
+        <div className="flex-1 min-w-0">
           <Wordmark size={13} />
-          <h1 className="text-4xl font-bold tracking-tight mt-1">{t(greetKey())}{s.prefs.userName ? `, ${s.prefs.userName}` : ''}</h1>
-          <p className="text-muted mt-2 max-w-xl text-[15px]">{t('homeTagline')}</p>
+          <h1 className="text-[32px] leading-tight font-bold tracking-tight mt-1">{t(greetKey())}{s.prefs.userName ? `, ${s.prefs.userName}` : ''}</h1>
+          <p className="text-muted mt-1.5 text-[15px] truncate">
+            {connected.length
+              ? connected.map((m) => {
+                const d = s.devices.find((x) => x.modelId === m.id);
+                return `${s.settings[m.id]?.nickname || m.name} · ${d ? (d.link === 'usb' ? t('usb') : t('wireless')) : t('bluetooth')}`;
+              }).join('   ')
+              : t('noDevices')}
+          </p>
         </div>
-        <div className="relative text-right">
-          <div className="text-5xl font-bold tracking-tight">{connected.length}</div>
+        <div className="text-right">
+          <div className="text-[40px] leading-none font-bold tabular-nums">{connected.length}</div>
           <div className="label">{t('connected')}</div>
         </div>
       </section>
@@ -60,9 +66,9 @@ export const Home = () => {
               const effect = dev && prof?.keyboard ? (prof.keyboard.lighting.mode === USER_LIGHT_MODE ? t('perKey') : tn(m.lightModes?.find((x) => x.mode === prof.keyboard!.lighting.mode)?.name ?? '')) : null;
               const dpi = dev && prof?.mouse ? prof.mouse.dpiStages[prof.mouse.dpiActive] : null;
               return (
-                <div key={m.id} className="panel p-5 flex gap-5 relative overflow-hidden group">
-                  <div className="h-28 w-28 rounded-2xl overflow-hidden shrink-0">
-                    <img src={imageFor(img)} alt={m.name} className="h-full w-full object-contain transition-transform group-hover:scale-105" draggable={false} />
+                <div key={m.id} className="panel p-5 flex gap-5">
+                  <div className="h-28 w-28 shrink-0">
+                    <img src={imageFor(img)} alt={m.name} className="h-full w-full object-contain" draggable={false} />
                   </div>
                   <div className="flex-1 min-w-0 flex flex-col">
                     <div className="text-[11px] text-muted tracking-widest">{m.brand}</div>
@@ -93,11 +99,9 @@ export const Home = () => {
 
       <div className="grid grid-cols-1 gap-4">
         <section className="panel p-5">
-          <h2 className="h2 mb-3 flex items-center gap-2"><Lightbulb size={16} className="text-accent-2" />{t('tips')}</h2>
+          <h2 className="h2 mb-3">{t('tips')}</h2>
           <ul className="flex flex-col gap-2 text-sm text-muted">
-            <li className="flex gap-2"><span className="text-accent-2">1</span>{t('tip1')}</li>
-            <li className="flex gap-2"><span className="text-accent-2">2</span>{t('tip2')}</li>
-            <li className="flex gap-2"><span className="text-accent-2">3</span>{t('tip3')}</li>
+            {(['tip1', 'tip2', 'tip3'] as const).map((k) => <li key={k} className="flex gap-2.5"><span className="text-accent-2">–</span>{t(k)}</li>)}
           </ul>
         </section>
       </div>

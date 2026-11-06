@@ -49,10 +49,9 @@ body {
 ::-webkit-scrollbar-track { background: transparent; }
 
 .panel {
-  background: color-mix(in srgb, var(--color-panel) 92%, transparent);
+  background: var(--color-panel);
   border: 1px solid var(--color-line);
-  border-radius: 16px;
-  box-shadow: 0 10px 40px -20px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
 }
 
 .btn {
@@ -64,8 +63,8 @@ body {
 }
 .btn:hover { border-color: var(--color-line-2); background: color-mix(in srgb, var(--color-panel-2) 70%, var(--color-line)); }
 .btn:disabled { opacity: 0.45; cursor: not-allowed; }
-.btn-primary { background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2)); border-color: transparent; color: #fff; box-shadow: 0 8px 24px -10px var(--color-accent); }
-.btn-primary:hover { filter: brightness(1.08); background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2)); }
+.btn-primary { background: var(--color-accent); border-color: transparent; color: #fff; }
+.btn-primary:hover { background: color-mix(in srgb, var(--color-accent) 88%, #000); border-color: transparent; }
 .btn-ghost { background: transparent; border-color: transparent; color: var(--color-muted); }
 .btn-ghost:hover { background: var(--color-panel-2); color: var(--color-text); }
 .btn-sm { @apply px-2.5 py-1.5 text-xs rounded-lg; }
@@ -100,9 +99,9 @@ input[type='color']::-webkit-color-swatch { border: none; border-radius: 7px; }
 .switch::after { content: ''; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: transform .15s; }
 .switch[data-on='true']::after { transform: translateX(20px); }
 
-.tab { @apply flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition-colors cursor-pointer; color: var(--color-muted); }
-.tab:hover { color: var(--color-text); background: var(--color-panel-2); }
-.tab[data-active='true'] { color: var(--color-text); background: var(--color-panel-2); box-shadow: inset 0 0 0 1px var(--color-line-2); }
+.tab { @apply flex items-center gap-2 px-3 pt-2 pb-2.5 text-sm font-medium transition-colors cursor-pointer; color: var(--color-muted); border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.tab:hover { color: var(--color-text); }
+.tab[data-active='true'] { color: var(--color-text); border-bottom-color: var(--color-accent); }
 
 .key {
   cursor: pointer;
@@ -111,7 +110,7 @@ input[type='color']::-webkit-color-swatch { border: none; border-radius: 7px; }
 .key:hover { filter: brightness(1.25); }
 .key[data-selected='true'] rect { stroke: var(--color-accent); stroke-width: 2; }
 
-.glow { box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-accent) 30%, transparent), 0 0 40px -10px var(--color-accent); }
+.glow { }
 
 @keyframes fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 .fade-in { animation: fade-in .25s ease-out; }
@@ -119,11 +118,7 @@ input[type='color']::-webkit-color-swatch { border: none; border-radius: 7px; }
 .toast { @apply fixed bottom-5 right-5 z-50 rounded-xl px-4 py-3 text-sm shadow-2xl;
   animation: fade-in .25s ease-out; background: var(--color-panel); border: 1px solid var(--color-line-2); }
 
-.hero-bg {
-  background:
-    radial-gradient(900px 420px at 20% -10%, color-mix(in srgb, var(--color-accent) 18%, transparent), transparent 60%),
-    radial-gradient(600px 300px at 90% 10%, rgba(80, 120, 255, 0.12), transparent 60%);
-}
+.hero-bg { }
 
 /* Custom dropdown */
 .dd-trigger {

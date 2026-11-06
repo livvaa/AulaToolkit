@@ -19,13 +19,11 @@ export const Overview = ({ modelId }: { modelId: string }) => {
 
   return (
     <div className="grid grid-cols-1 xl:grid-cols-[1.3fr_1fr] gap-5">
-      <section className="panel overflow-hidden relative glow">
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(600px 300px at 70% 20%, color-mix(in srgb, var(--color-accent) 25%, transparent), transparent 70%)' }} />
+      <section className="panel overflow-hidden">
         <div className="flex items-stretch">
-          <div className="p-6 flex flex-col gap-2.5 flex-1 relative">
-            <div className="text-xs font-semibold tracking-[0.2em] text-muted">{model.brand}</div>
-            <h1 className="text-4xl font-bold tracking-tight">{model.name}</h1>
-            <p className="text-muted max-w-sm">{tn(model.tagline)}</p>
+          <div className="p-6 flex flex-col gap-2.5 flex-1 justify-center">
+            <div className="text-xs font-semibold text-muted">{model.brand}</div>
+            <h1 className="text-[34px] leading-tight font-semibold tracking-tight">{model.name}</h1>
             <div className="flex items-center gap-2 flex-wrap mt-2">
               <span className={`chip ${online || bt ? 'chip-ok' : ''}`}>
                 {online ? (dev.link === 'usb' ? <Cable size={13} /> : <Radio size={13} />) : bt ? <Bluetooth size={13} /> : null}
@@ -36,14 +34,14 @@ export const Overview = ({ modelId }: { modelId: string }) => {
               ) : bt?.pct != null && (
                 <span className="chip"><BatteryMedium size={13} />{bt.pct}%</span>
               )}
-              {dev?.live?.sensor && <span className="chip chip-accent">{t('sensor')} {dev.live.sensor}</span>}
-              {dev?.live?.receiver8k && <span className="chip chip-accent">8K {t('receiver')}</span>}
+              {dev?.live?.sensor && <span className="chip">{t('sensor')} {dev.live.sensor}</span>}
+              {dev?.live?.receiver8k && <span className="chip">8K {t('receiver')}</span>}
               {dev?.note === 'asleep' && <span className="chip chip-warn"><Moon size={13} />{t('asleep')}</span>}
               {online && <button className="btn btn-ghost btn-sm" onClick={() => void window.aula.rescan()}><RefreshCw size={13} />{t('refresh')}</button>}
             </div>
           </div>
           <div className="w-[300px] shrink-0 relative flex items-center justify-center p-3">
-            <img src={imageFor(image)} alt={model.name} className="relative w-full object-contain drop-shadow-2xl" draggable={false} />
+            <img src={imageFor(image)} alt={model.name} className="w-full object-contain" draggable={false} />
           </div>
         </div>
       </section>

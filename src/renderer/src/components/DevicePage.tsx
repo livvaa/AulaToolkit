@@ -52,7 +52,7 @@ export const DevicePage = () => {
     return (
       <div className="p-5 flex flex-col gap-4 fade-in" key={modelId}>
         <div className="chip chip-warn self-start"><PlugZap size={13} />{t('connectToConfigure')}</div>
-        <nav className="flex items-center gap-1">
+        <nav className="flex items-center" style={{ borderBottom: '1px solid var(--color-line)' }}>
           <button className="tab" data-active={tab !== 'device'} onClick={() => setTab('overview')}><LayoutDashboard size={16} />{t('overview')}</button>
           <button className="tab" data-active={tab === 'device'} onClick={() => setTab('device')}><Wrench size={16} />{t('deviceTab')}</button>
         </nav>
@@ -64,7 +64,7 @@ export const DevicePage = () => {
   return (
     <div className="p-5 flex flex-col gap-4 fade-in" key={modelId}>
       <ProfileBar modelId={modelId} />
-      <nav className="flex items-center gap-1 flex-wrap">
+      <nav className="flex items-center flex-wrap" style={{ borderBottom: '1px solid var(--color-line)' }}>
         {tabs.filter((x) => x.show).map((x) => (
           <button key={x.id} className="tab" data-active={tab === x.id} onClick={() => setTab(x.id)}>{x.icon}{x.label}</button>
         ))}
