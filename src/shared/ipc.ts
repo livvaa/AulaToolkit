@@ -101,6 +101,8 @@ export interface AppPrefs {
   osdDuration: 'short' | 'normal' | 'long';
   /** Ctrl+Alt+Shift+A restarts the app. */
   restartHotkey?: boolean;
+  /** Of the models sharing USB ids (S75 Pro, L99), the one last seen over USB; used on the dongle. */
+  lastSharedModel?: string;
 }
 
 export type OsdPosition = 'top-left' | 'top-center' | 'top-right' | 'center' | 'bottom-left' | 'bottom-center' | 'bottom-right';

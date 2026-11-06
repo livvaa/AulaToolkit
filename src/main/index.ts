@@ -70,8 +70,11 @@ async function applyVendorBlock(): Promise<void> {
   } catch { /* best effort */ } finally { vendorBusy = false; }
 }
 manager.watchPaused = () => vendorRunning;
-// Same USB ids, no telling name (the dongle): the model the user has set up, the S75 Pro if both or none.
+// Same USB ids, no telling name (the dongle): the one last connected over USB, where the name says
+// which it is; else the one set up, the S75 Pro if both or none.
 manager.pickShared = (c) => {
+  const last = c.find((m) => m.id === prefs?.lastSharedModel);
+  if (last) return last;
   const known = c.filter((m) => prefs?.knownDevices?.includes(m.id));
   return known.length === 1 ? known[0] : c[0];
 };
@@ -297,7 +300,7 @@ function registerIpc(): void {
   ipcMain.handle(CH.APP_PREFS_LOAD, () => prefs);
   ipcMain.handle(CH.APP_PREFS_SAVE, (_e, p: AppPrefs) => {
     const blockChanged = !!p.blockVendorSoftware !== !!prefs.blockVendorSoftware;
-    prefs = p; savePrefs(p);
+    prefs = { ...p, lastSharedModel: prefs.lastSharedModel }; savePrefs(prefs); // kept by main, the renderer's copy is stale
     applyOsdPrefs(p);
     updater.applyPrefs();
     if (blockChanged) void applyVendorBlock();
@@ -392,7 +395,14 @@ function registerIpc(): void {
   let careTimer: NodeJS.Timeout | null = null;
   const scheduleCare = (): void => { if (!careTimer) careTimer = setTimeout(() => { careTimer = null; checkBatteryCare(); }, 2000); };
   setInterval(checkBatteryCare, 30e3);
-  manager.on('attached', () => void applyVendorBlock());
+  manager.on('attached', (key: string) => {
+    void applyVendorBlock();
+    const [id, link] = key.split(':');
+    if (link === 'usb' && MODELS.find((m) => m.id === id)?.productMatch && prefs.lastSharedModel !== id) {
+      prefs = { ...prefs, lastSharedModel: id };
+      savePrefs(prefs);
+    }
+  });
   // Bluetooth state comes from Windows, poll it every minute
   const pollBluetooth = (): void => {
     void readBluetoothBatteries().then((list) => {
