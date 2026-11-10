@@ -32,6 +32,7 @@ import * as battery from './battery';
 import * as library from './library';
 import { readBluetoothBatteries } from './bluetoothBattery';
 import { ensureCliOnPath } from './cliPath';
+import { applyAutostartTask } from './autostartTask';
 import { watchDisplayPower } from './displayPower';
 import { setMediaWatch, stopMediaWatch } from './mediaPlayback';
 
@@ -162,13 +163,12 @@ let tray: Tray | null = null;
 let flyout: BrowserWindow | null = null;
 let flyoutHideTimer: NodeJS.Timeout | null = null;
 let quitting = false;
-const startHidden = process.argv.includes('--hidden');
+const startHidden = process.argv.includes('--hidden') || updater.consumeStartHidden();
 const startDelayed = process.argv.includes('--delayed');
 
 function applyAutostart(p: AppPrefs): void {
-  if (!app.isPackaged) return; // a dev run must not register electron.exe to start with Windows
-  const on = typeof p.autostart === 'string' ? p.autostart !== 'off' : !!p.autostart;
-  app.setLoginItemSettings({ openAtLogin: on, args: on ? ['--hidden', ...(p.autostart === 'delayed' ? ['--delayed'] : [])] : [] });
+  const mode = typeof p.autostart === 'string' ? p.autostart : p.autostart ? 'on' : 'off';
+  void applyAutostartTask(mode, (m) => manager.addLog('i', m));
 }
 let prefs: AppPrefs;
 let stopDisplayPowerWatch: (() => void) | null = null;
@@ -343,7 +343,7 @@ function registerIpc(): void {
   });
   ipcMain.handle(CH.APP_FULL_RESET, async () => {
     quitting = true;
-    app.setLoginItemSettings({ openAtLogin: false });
+    await applyAutostartTask('off', () => undefined);
     await manager.stop().catch(() => undefined);
     for (const sub of ['settings', 'battery', 'logs', 'screen', 'library']) rmSync(join(app.getPath('userData'), sub), { recursive: true, force: true });
     app.relaunch();

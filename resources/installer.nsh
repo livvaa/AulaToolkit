@@ -6,5 +6,8 @@
     Pop $0
     nsExec::Exec `powershell.exe -NoProfile -WindowStyle Hidden -Command "$$d = '$INSTDIR\resources\bin'; $$p = [Environment]::GetEnvironmentVariable('Path', 'User'); [Environment]::SetEnvironmentVariable('Path', (($$p -split ';' | Where-Object { $$_ -and $$_.TrimEnd('\') -ine $$d }) -join ';'), 'User')"`
     Pop $0
+    ; the autostart task (src/main/autostartTask.ts)
+    nsExec::Exec `powershell.exe -NoProfile -WindowStyle Hidden -Command "Unregister-ScheduledTask -TaskName 'AULA Toolkit' -Confirm:$$false -ErrorAction SilentlyContinue"`
+    Pop $0
   ${endIf}
 !macroend
