@@ -1,7 +1,7 @@
 {
   "name": "aula-toolkit",
   "productName": "AULA Toolkit",
-  "version": "0.2.1-beta.2",
+  "version": "0.3.0",
   "description": "Unofficial open-source control app for AULA keyboards and mice",
   "main": "./out/main/index.js",
   "author": "Livvaa",
