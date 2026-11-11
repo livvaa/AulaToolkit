@@ -18,6 +18,7 @@ const api: AulaApi = {
     return () => ipcRenderer.off(CH.LOG_EVENT, h);
   },
   clearLog: () => ipcRenderer.invoke(CH.LOG_CLEAR),
+  addLog: (text) => ipcRenderer.send(CH.LOG_ADD, text),
   loadSettings: (modelId) => ipcRenderer.invoke(CH.SETTINGS_LOAD, modelId),
   saveSettings: (modelId, data) => ipcRenderer.invoke(CH.SETTINGS_SAVE, modelId, data),
   loadPrefs: () => ipcRenderer.invoke(CH.APP_PREFS_LOAD),

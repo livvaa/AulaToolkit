@@ -309,6 +309,7 @@ function registerIpc(): void {
   ipcMain.handle(CH.DEVICE_CALL, (_e, key: string, method: string, args: unknown[]) => manager.call(key, method, args));
   ipcMain.handle(CH.LOG_GET, () => manager.getLog());
   ipcMain.handle(CH.LOG_CLEAR, () => manager.clearLog());
+  ipcMain.on(CH.LOG_ADD, (_e, text: unknown) => manager.addLog('!', String(text).slice(0, 300)));
   ipcMain.handle(CH.SETTINGS_LOAD, (_e, modelId: string) => loadDeviceSettings(modelId));
   ipcMain.handle(CH.SETTINGS_SAVE, (_e, modelId: string, data: DeviceSettingsFile) => {
     battery.setInstalledPack(modelId, data?.batteries?.installed);
@@ -317,7 +318,7 @@ function registerIpc(): void {
   ipcMain.handle(CH.APP_PREFS_LOAD, () => prefs);
   ipcMain.handle(CH.APP_PREFS_SAVE, (_e, p: AppPrefs) => {
     const blockChanged = !!p.blockVendorSoftware !== !!prefs.blockVendorSoftware;
-    prefs = { ...p, lastSharedModel: prefs.lastSharedModel }; savePrefs(prefs); // kept by main, the renderer's copy is stale
+    prefs = { ...p, lastSharedModel: prefs.lastSharedModel, prefsVersion: prefs.prefsVersion }; savePrefs(prefs); // kept by main, the renderer's copy is stale
     applyOsdPrefs(p);
     updater.applyPrefs();
     if (blockChanged) void applyVendorBlock();
@@ -552,7 +553,10 @@ if (!gotLock) {
     app.on('browser-window-created', (_, window) => optimizer.watchWindowShortcuts(window));
     // system audio for the music rhythm (loopback, no picker)
     session.defaultSession.setDisplayMediaRequestHandler((_req, cb) => {
-      void desktopCapturer.getSources({ types: ['screen'] }).then((s) => cb(s[0] ? { video: s[0], audio: 'loopback' } : {})).catch(() => cb({}));
+      void desktopCapturer.getSources({ types: ['screen'] }).then((s) => {
+        if (!s[0]) manager.addLog('!', 'system audio: Windows offered no screen to capture the sound from');
+        cb(s[0] ? { video: s[0], audio: 'loopback' } : {});
+      }).catch((e: Error) => { manager.addLog('!', `system audio: ${e.message}`); cb({}); });
     });
     registerIpc();
     createWindow();

@@ -34,6 +34,11 @@ export const loadPrefs = (): AppPrefs => {
   if (!['short', 'normal', 'long'].includes(p.osdDuration)) p.osdDuration = 'normal';
   if (!['system', 'dark', 'light'].includes(p.theme)) p.theme = 'system';
   if (typeof p.accent !== 'string' || !p.accent) p.accent = 'ember';
+  // 1: tray, restart keys and battery options became on by default; switch them on once for everyone.
+  if ((p.prefsVersion ?? 0) < 1) {
+    Object.assign(p, { minimizeToTray: true, minimizeToTrayOnMinimize: true, restartHotkey: true, batteryAlerts: true, batteryStats: true, batteryCare: true, prefsVersion: 1 });
+    try { savePrefs(p); } catch { /* read-only data folder: try again next start */ }
+  }
   return p;
 };
 export const savePrefs = (p: AppPrefs): void => write('prefs.json', p);

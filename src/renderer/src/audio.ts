@@ -22,7 +22,9 @@ async function open(): Promise<boolean> {
     ctx.createMediaStreamSource(stream).connect(analyser);
     bins = new Uint8Array(analyser.frequencyBinCount);
     return true;
-  } catch {
+  } catch (e) {
+    const err = e as Error;
+    window.aula.addLog(`system audio: ${err.name ? `${err.name}: ` : ''}${err.message}`);
     close();
     return false;
   }

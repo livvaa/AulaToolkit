@@ -10,6 +10,7 @@ export const CH = {
   LOG_GET: 'log:get',
   LOG_EVENT: 'log:entry',
   LOG_CLEAR: 'log:clear',
+  LOG_ADD: 'log:add',
   SETTINGS_LOAD: 'settings:load',
   SETTINGS_SAVE: 'settings:save',
   APP_PREFS_LOAD: 'app:prefs:load',
@@ -103,6 +104,8 @@ export interface AppPrefs {
   restartHotkey?: boolean;
   /** Of the models sharing USB ids (S75 Pro, L99), the one last seen over USB; used on the dongle. */
   lastSharedModel?: string;
+  /** Last one-time migration applied by loadPrefs (see src/main/store.ts). */
+  prefsVersion?: number;
 }
 
 export type OsdPosition = 'top-left' | 'top-center' | 'top-right' | 'center' | 'bottom-left' | 'bottom-center' | 'bottom-right';
@@ -122,7 +125,7 @@ export interface UpdateState {
   checkedAt?: number;
 }
 
-export const DEFAULT_PREFS: AppPrefs = { language: 'tr', autostart: 'on', minimizeToTray: true, minimizeToTrayOnMinimize: false, theme: 'system', accent: 'ember', knownDevices: [], userName: '', onboarded: false, batteryAlerts: true, batteryThreshold: 20, blockVendorSoftware: false, updateChannel: 'beta', updateInterval: 'daily', autoDownload: true, batteryStats: false, batteryCare: true, osd: true, osdOnTop: true, osdAllDisplays: false, osdPosition: 'bottom-center', osdDuration: 'normal', restartHotkey: true };
+export const DEFAULT_PREFS: AppPrefs = { language: 'tr', autostart: 'on', minimizeToTray: true, minimizeToTrayOnMinimize: true, theme: 'system', accent: 'ember', knownDevices: [], userName: '', onboarded: false, batteryAlerts: true, batteryThreshold: 20, blockVendorSoftware: false, updateChannel: 'beta', updateInterval: 'daily', autoDownload: true, batteryStats: true, batteryCare: true, osd: true, osdOnTop: true, osdAllDisplays: false, osdPosition: 'bottom-center', osdDuration: 'normal', restartHotkey: true };
 
 export interface AulaApi {
   getDevices(): Promise<DeviceStatus[]>;
@@ -131,6 +134,8 @@ export interface AulaApi {
   getLog(): Promise<LogEntry[]>;
   onLog(cb: (e: LogEntry) => void): () => void;
   clearLog(): Promise<void>;
+  /** Adds a warning from the window to the log (for the diagnostics file). */
+  addLog(text: string): void;
   loadSettings(modelId: string): Promise<DeviceSettingsFile>;
   saveSettings(modelId: string, data: DeviceSettingsFile): Promise<void>;
   loadPrefs(): Promise<AppPrefs>;
