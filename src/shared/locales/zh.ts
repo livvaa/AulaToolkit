@@ -67,6 +67,7 @@ export const zh: UiDict = {
   batteryInUse: '使用中每 1%', batteryChargeTime: '充满时间', batteryCharging: '充电中', batteryAgo: '{t}前', batteryCollecting: '正在收集数据', batteryNotSeen: '尚未记录', batteryWatched: '已记录 {d}', batteryPacks: '电池', batteryPack: '电池 {n}', batteryInUse2: '使用中', batteryAdd: '添加电池', batteryPacksHint: '更换电池时选择当前装入的电池；每块电池的数据分开记录。', batteryNoFastCharge: '请勿使用快充充电',
   batteryCare: '电池养护', batteryCareHint: '充电达到 80% 时提醒您拔下设备。', batteryCareTitle: '{name} 已充至 {pct}%', batteryCareBody: '请断开充电，以延长电池寿命。',
   restartKeys: '重启快捷键', restartKeysHint: 'Ctrl + Alt + Shift + A 可在任意位置重启 AULA Toolkit，用于卡住时。', restarting: '正在重启',
+  devCount: '支持 {n} 款设备', devOpenList: '打开列表', devSearch: '搜索设备（如 S75、SC900）', devAll: '全部', devKeyboard: '键盘', devMouse: '鼠标', devKeyboards: '键盘', devMice: '鼠标', devVerified: '已验证', devAwaiting: '待测试', devAwaitingHint: '“待测试”：协议来自官方驱动，但尚未在真实设备上试过。', devRequest: '没有你的设备？提交请求', devNone: '没有匹配的设备。',
 };
 
 export const names: Record<string, string> = {
@@ -105,4 +106,5 @@ export const names: Record<string, string> = {
   // variants
   White: '白色', Black: '黑色',
   Steady: '常亮', Breathing: '呼吸', Ember: '余烬', Cyan: '青色', Green: '绿色', Purple: '紫色', Pink: '粉色',
+  'Tri-mode keyboard with a 3.5" screen': '三模键盘，配 3.5 英寸屏幕',
 };

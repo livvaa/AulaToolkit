@@ -67,6 +67,7 @@ export const fr: UiDict = {
   batteryInUse: '1 % en usage', batteryChargeTime: 'Charge complète', batteryCharging: 'en charge', batteryAgo: 'il y a {t}', batteryCollecting: 'Collecte des données', batteryNotSeen: 'Pas encore vu', batteryWatched: '{d} observés', batteryPacks: 'Batteries', batteryPack: 'Batterie {n}', batteryInUse2: 'En place', batteryAdd: 'Ajouter une batterie', batteryPacksHint: 'Lors d’un échange, choisissez la batterie en place ; chacune garde ses propres valeurs.', batteryNoFastCharge: 'N’utilisez pas la charge rapide pour recharger',
   batteryCare: 'Entretien de la batterie', batteryCareHint: 'Rappelle de débrancher l’appareil à 80 % pendant la charge.', batteryCareTitle: '{name} est chargé à {pct}%', batteryCareBody: 'Débranchez-le du chargeur pour préserver la batterie plus longtemps.',
   restartKeys: 'Raccourci de redémarrage', restartKeysHint: 'Ctrl + Alt + Maj + A redémarre AULA Toolkit depuis n’importe où quand quelque chose bloque.', restarting: 'Redémarrage',
+  devCount: '{n} appareils pris en charge', devOpenList: 'Ouvrir la liste', devSearch: 'Rechercher (ex. S75, SC900)', devAll: 'Tous', devKeyboard: 'Clavier', devMouse: 'Souris', devKeyboards: 'Claviers', devMice: 'Souris', devVerified: 'Testé', devAwaiting: 'Test en attente', devAwaitingHint: '« Test en attente » : le protocole vient du pilote officiel mais n’a pas encore été essayé sur un vrai appareil.', devRequest: 'Appareil absent ? Demandez-le', devNone: 'Aucun appareil ne correspond à cette recherche.',
 };
 
 export const names: Record<string, string> = {
@@ -105,4 +106,5 @@ export const names: Record<string, string> = {
   // variants
   White: 'Blanc', Black: 'Noir',
   Steady: 'Fixe', Breathing: 'Respiration', Ember: 'Braise', Cyan: 'Cyan', Green: 'Vert', Purple: 'Violet', Pink: 'Rose',
+  'Tri-mode keyboard with a 3.5" screen': 'Clavier tri-mode avec écran de 3,5"',
 };

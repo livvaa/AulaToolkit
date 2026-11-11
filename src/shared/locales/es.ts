@@ -67,6 +67,7 @@ export const es: UiDict = {
   batteryInUse: '1 % en uso', batteryChargeTime: 'Carga completa', batteryCharging: 'cargando', batteryAgo: 'hace {t}', batteryCollecting: 'Recopilando datos', batteryNotSeen: 'Aún no visto', batteryWatched: '{d} observados', batteryPacks: 'Baterías', batteryPack: 'Batería {n}', batteryInUse2: 'En uso', batteryAdd: 'Añadir batería', batteryPacksHint: 'Al cambiarla, elige la batería que está en el ratón; cada una guarda sus propios datos.', batteryNoFastCharge: 'No utilice carga rápida para cargar',
   batteryCare: 'Cuidado de la batería', batteryCareHint: 'Te recuerda desconectar el dispositivo del cargador al 80 %.', batteryCareTitle: '{name} cargado al {pct}%', batteryCareBody: 'Desconéctalo del cargador para que la batería dure más.',
   restartKeys: 'Atajo de reinicio', restartKeysHint: 'Ctrl + Alt + Shift + A reinicia AULA Toolkit desde cualquier lugar cuando algo se atasca.', restarting: 'Reiniciando',
+  devCount: '{n} dispositivos compatibles', devOpenList: 'Abrir lista', devSearch: 'Buscar dispositivo (p. ej. S75, SC900)', devAll: 'Todos', devKeyboard: 'Teclado', devMouse: 'Ratón', devKeyboards: 'Teclados', devMice: 'Ratones', devVerified: 'Verificado', devAwaiting: 'Pendiente de prueba', devAwaitingHint: '"Pendiente de prueba": el protocolo viene del controlador oficial, pero aún no se ha probado en un dispositivo real.', devRequest: '¿Falta tu dispositivo? Solicítalo', devNone: 'Ningún dispositivo coincide con la búsqueda.',
 };
 
 export const names: Record<string, string> = {
@@ -105,4 +106,5 @@ export const names: Record<string, string> = {
   // variants
   White: 'Blanco', Black: 'Negro',
   Steady: 'Fijo', Breathing: 'Respiración', Ember: 'Brasa', Cyan: 'Cian', Green: 'Verde', Purple: 'Morado', Pink: 'Rosa',
+  'Tri-mode keyboard with a 3.5" screen': 'Teclado tri-modo con pantalla de 3,5"',
 };

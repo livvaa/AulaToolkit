@@ -67,6 +67,7 @@ export const tr: UiDict = {
   batteryInUse: 'Kullanımda %1', batteryChargeTime: 'Tam şarj süresi', batteryCharging: 'şarj oluyor', batteryAgo: '{t} önce', batteryCollecting: 'Veri toplanıyor', batteryNotSeen: 'Henüz görülmedi', batteryWatched: '{d} izlendi', batteryPacks: 'Piller', batteryPack: 'Pil {n}', batteryInUse2: 'Takılı', batteryAdd: 'Pil ekle', batteryPacksHint: 'Pili değiştirince takılı olanı seç, her pilin değerleri ayrı tutulur.', batteryNoFastCharge: 'Hızlı şarj cihazı kullanma (kutusunda da yazıyor)',
   batteryCare: 'Pil bakımı', batteryCareHint: 'Şarj olurken %80\'e gelince cihazı çıkarmanı hatırlatır.', batteryCareTitle: '{name} %{pct} şarj oldu', batteryCareBody: 'Pil daha uzun dayansın diye cihazı şarjdan çıkar.',
   restartKeys: 'Yeniden başlatma kısayolu', restartKeysHint: 'Ctrl + Alt + Shift + A, bir şey takıldığında AULA Toolkit\'i her yerden yeniden başlatır.', restarting: 'Yeniden başlatılıyor',
+  devCount: '{n} cihaz destekleniyor', devOpenList: 'Listeyi aç', devSearch: 'Cihaz ara (ör. S75, SC900)', devAll: 'Tümü', devKeyboard: 'Klavye', devMouse: 'Fare', devKeyboards: 'Klavyeler', devMice: 'Fareler', devVerified: 'Doğrulandı', devAwaiting: 'Test bekliyor', devAwaitingHint: '"Test bekliyor": protokol resmi sürücüden alındı, gerçek cihazda henüz denenmedi.', devRequest: 'Cihazın yok mu? İstek aç', devNone: 'Bu aramaya uyan cihaz yok.',
 };
 
 export const names: Record<string, string> = {
@@ -108,4 +109,5 @@ export const names: Record<string, string> = {
   'Fixed on': 'Sabit', Respire: 'Nefes', Rainbow: 'Gökkuşağı', 'Flash away': 'Parlayıp Sönme', Raindrops: 'Yağmur Damlaları', 'Rainbow wheel': 'Gökkuşağı Çarkı', 'Ripples shining': 'Parıldayan Dalgalar', 'Stars twinkle': 'Yıldız Pırıltısı', 'Shadow disappear': 'Kaybolan Gölge', 'Retro snake': 'Retro Yılan', 'Neon stream': 'Neon Akışı', Reaction: 'Tepki', 'Sine wave': 'Sinüs Dalgası', 'Retinue scanning': 'Tarama', 'Rotating windmill': 'Dönen Yel Değirmeni', 'Colorful waterfall': 'Renkli Şelale', Blossoming: 'Çiçeklenme', 'Rotating storm': 'Dönen Fırtına',
   'Sleep after (wireless)': 'Uyku süresi (kablosuz)', Debounce: 'Tuş tepki süresi', '1.5 min': '1,5 dk', '2 min': '2 dk', '3 min': '3 dk', '4 min': '4 dk', '10 min': '10 dk', '15 min': '15 dk', '20 min': '20 dk',
   '75% · 80 keys + knob': '%75 · 80 tuş + düğme', 'RGB · 18 effects': 'RGB · 18 efekt', '75% gasket-mount keyboard with a volume knob and 18 lighting effects': 'Ses düğmeli ve 18 ışık efektli %75 gasket klavye', Ember: 'Kor', Cyan: 'Camgöbeği', Green: 'Yeşil', Purple: 'Mor', Pink: 'Pembe',
+  'Tri-mode keyboard with a 3.5" screen': '3,5" ekranlı üç modlu klavye',
 };

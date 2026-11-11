@@ -67,6 +67,7 @@ export const vi: UiDict = {
   batteryInUse: '1 % khi dùng', batteryChargeTime: 'Sạc đầy', batteryCharging: 'đang sạc', batteryAgo: '{t} trước', batteryCollecting: 'Đang thu thập dữ liệu', batteryNotSeen: 'Chưa ghi nhận', batteryWatched: 'đã theo dõi {d}', batteryPacks: 'Pin', batteryPack: 'Pin {n}', batteryInUse2: 'Đang lắp', batteryAdd: 'Thêm pin', batteryPacksHint: 'Khi thay pin, hãy chọn pin đang lắp; số liệu của mỗi pin được giữ riêng.', batteryNoFastCharge: 'Không sử dụng sạc nhanh để sạc',
   batteryCare: 'Chăm sóc pin', batteryCareHint: 'Nhắc bạn rút sạc khi thiết bị đạt 80 %.', batteryCareTitle: '{name} đã sạc đến {pct}%', batteryCareBody: 'Hãy rút sạc để pin bền lâu hơn.',
   restartKeys: 'Phím khởi động lại', restartKeysHint: 'Ctrl + Alt + Shift + A khởi động lại AULA Toolkit ở bất cứ đâu khi có gì bị treo.', restarting: 'Đang khởi động lại',
+  devCount: 'Hỗ trợ {n} thiết bị', devOpenList: 'Mở danh sách', devSearch: 'Tìm thiết bị (vd. S75, SC900)', devAll: 'Tất cả', devKeyboard: 'Bàn phím', devMouse: 'Chuột', devKeyboards: 'Bàn phím', devMice: 'Chuột', devVerified: 'Đã kiểm chứng', devAwaiting: 'Chờ thử', devAwaitingHint: '"Chờ thử": giao thức lấy từ trình điều khiển chính thức nhưng chưa được thử trên thiết bị thật.', devRequest: 'Không có thiết bị của bạn? Gửi yêu cầu', devNone: 'Không có thiết bị nào khớp.',
 };
 
 export const names: Record<string, string> = {
@@ -105,4 +106,5 @@ export const names: Record<string, string> = {
   // variants
   White: 'Trắng', Black: 'Đen',
   Steady: 'Tĩnh', Breathing: 'Thở', Ember: 'Than hồng', Cyan: 'Xanh lơ', Green: 'Xanh lá', Purple: 'Tím', Pink: 'Hồng',
+  'Tri-mode keyboard with a 3.5" screen': 'Bàn phím ba chế độ với màn hình 3,5"',
 };

@@ -65,6 +65,7 @@ export const en = {
   batteryInUse: '1 % in use', batteryChargeTime: 'Full charge', batteryCharging: 'charging', batteryAgo: '{t} ago', batteryCollecting: 'Collecting data', batteryNotSeen: 'Not seen yet', batteryWatched: '{d} watched', batteryPacks: 'Batteries', batteryPack: 'Battery {n}', batteryInUse2: 'In use', batteryAdd: 'Add battery', batteryPacksHint: 'Pick the battery in the mouse when you swap it; each battery keeps its own figures.', batteryNoFastCharge: 'Don\'t use a fast charger (it says so on the box)',
   batteryCare: 'Battery care', batteryCareHint: 'Reminds you to unplug the device at 80 % while it charges.', batteryCareTitle: '{name} is charged to {pct}%', batteryCareBody: 'Unplug it from the charger to keep the battery healthy for longer.',
   restartKeys: 'Restart keys', restartKeysHint: 'Ctrl + Alt + Shift + A restarts AULA Toolkit from anywhere, for when something gets stuck.', restarting: 'Restarting',
+  devCount: '{n} devices supported', devOpenList: 'Open list', devSearch: 'Search devices (e.g. S75, SC900)', devAll: 'All', devKeyboard: 'Keyboard', devMouse: 'Mouse', devKeyboards: 'Keyboards', devMice: 'Mice', devVerified: 'Verified', devAwaiting: 'Awaiting test', devAwaitingHint: '"Awaiting test": the protocol comes from the official driver but has not been tried on a real device yet.', devRequest: 'Device missing? Request it', devNone: 'No device matches this search.',
 };
 
 export type UiDict = typeof en;

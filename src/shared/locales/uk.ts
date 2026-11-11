@@ -67,6 +67,7 @@ export const uk: UiDict = {
   batteryInUse: '1 % під час роботи', batteryChargeTime: 'Повна зарядка', batteryCharging: 'заряджається', batteryAgo: '{t} тому', batteryCollecting: 'Збір даних', batteryNotSeen: 'Ще не було', batteryWatched: 'спостереження: {d}', batteryPacks: 'Батареї', batteryPack: 'Батарея {n}', batteryInUse2: 'Встановлена', batteryAdd: 'Додати батарею', batteryPacksHint: 'Під час заміни виберіть встановлену батарею; дані кожної зберігаються окремо.', batteryNoFastCharge: 'Не використовуйте швидке заряджання для заряджання',
   batteryCare: 'Догляд за батареєю', batteryCareHint: 'Нагадує від’єднати пристрій від зарядки на 80 %.', batteryCareTitle: '{name} заряджено до {pct}%', batteryCareBody: 'Від’єднайте його від зарядки, щоб батарея довше залишалася в доброму стані.',
   restartKeys: 'Клавіші перезапуску', restartKeysHint: 'Ctrl + Alt + Shift + A перезапускає AULA Toolkit звідусіль, якщо щось зависло.', restarting: 'Перезапуск',
+  devCount: 'Підтримується пристроїв: {n}', devOpenList: 'Відкрити список', devSearch: 'Пошук пристрою (напр. S75, SC900)', devAll: 'Усі', devKeyboard: 'Клавіатура', devMouse: 'Миша', devKeyboards: 'Клавіатури', devMice: 'Миші', devVerified: 'Перевірено', devAwaiting: 'Чекає перевірки', devAwaitingHint: '«Чекає перевірки»: протокол узято з офіційного драйвера, але ще не випробувано на реальному пристрої.', devRequest: 'Немає вашого пристрою? Запитайте', devNone: 'Нічого не знайдено.',
 };
 
 export const names: Record<string, string> = {
@@ -105,4 +106,5 @@ export const names: Record<string, string> = {
   // variants
   White: 'Білий', Black: 'Чорний',
   Steady: 'Статичний', Breathing: 'Дихання', Ember: 'Жар', Cyan: 'Бірюзовий', Green: 'Зелений', Purple: 'Фіолетовий', Pink: 'Рожевий',
+  'Tri-mode keyboard with a 3.5" screen': 'Трирежимна клавіатура з екраном 3,5"',
 };

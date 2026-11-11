@@ -67,6 +67,7 @@ export const ru: UiDict = {
   batteryInUse: '1 % при работе', batteryChargeTime: 'Полная зарядка', batteryCharging: 'заряжается', batteryAgo: '{t} назад', batteryCollecting: 'Сбор данных', batteryNotSeen: 'Ещё не было', batteryWatched: 'наблюдение: {d}', batteryPacks: 'Батареи', batteryPack: 'Батарея {n}', batteryInUse2: 'Установлена', batteryAdd: 'Добавить батарею', batteryPacksHint: 'При замене выберите установленную батарею; данные каждой хранятся отдельно.', batteryNoFastCharge: 'Не используйте быструю зарядку для зарядки',
   batteryCare: 'Уход за батареей', batteryCareHint: 'Напоминает отключить устройство от зарядки на 80 %.', batteryCareTitle: '{name} заряжено до {pct}%', batteryCareBody: 'Отключите его от зарядки, чтобы батарея дольше оставалась в хорошем состоянии.',
   restartKeys: 'Клавиши перезапуска', restartKeysHint: 'Ctrl + Alt + Shift + A перезапускает AULA Toolkit откуда угодно, если что-то зависло.', restarting: 'Перезапуск',
+  devCount: 'Поддерживается устройств: {n}', devOpenList: 'Открыть список', devSearch: 'Поиск устройства (напр. S75, SC900)', devAll: 'Все', devKeyboard: 'Клавиатура', devMouse: 'Мышь', devKeyboards: 'Клавиатуры', devMice: 'Мыши', devVerified: 'Проверено', devAwaiting: 'Ждёт проверки', devAwaitingHint: '«Ждёт проверки»: протокол взят из официального драйвера, но ещё не опробован на реальном устройстве.', devRequest: 'Нет вашего устройства? Запросите', devNone: 'Ничего не найдено.',
 };
 
 export const names: Record<string, string> = {
@@ -105,4 +106,5 @@ export const names: Record<string, string> = {
   // variants
   White: 'Белый', Black: 'Чёрный',
   Steady: 'Постоянный', Breathing: 'Дыхание', Ember: 'Тлеющий', Cyan: 'Бирюзовый', Green: 'Зелёный', Purple: 'Фиолетовый', Pink: 'Розовый',
+  'Tri-mode keyboard with a 3.5" screen': 'Трёхрежимная клавиатура с экраном 3,5"',
 };

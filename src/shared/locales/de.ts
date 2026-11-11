@@ -67,6 +67,7 @@ export const de: UiDict = {
   batteryInUse: '1 % im Betrieb', batteryChargeTime: 'Volle Ladung', batteryCharging: 'lädt', batteryAgo: 'vor {t}', batteryCollecting: 'Daten werden gesammelt', batteryNotSeen: 'Noch nicht gesehen', batteryWatched: '{d} beobachtet', batteryPacks: 'Akkus', batteryPack: 'Akku {n}', batteryInUse2: 'Eingesetzt', batteryAdd: 'Akku hinzufügen', batteryPacksHint: 'Wählen Sie beim Wechsel den eingesetzten Akku; jeder Akku behält eigene Werte.', batteryNoFastCharge: 'Zum Laden kein Schnellladen verwenden',
   batteryCare: 'Akkupflege', batteryCareHint: 'Erinnert daran, das Gerät bei 80 % vom Ladegerät zu trennen.', batteryCareTitle: '{name} ist zu {pct}% geladen', batteryCareBody: 'Trennen Sie es vom Ladegerät, damit der Akku länger gesund bleibt.',
   restartKeys: 'Neustart-Tasten', restartKeysHint: 'Strg + Alt + Umschalt + A startet AULA Toolkit von überall neu, wenn etwas hängt.', restarting: 'Wird neu gestartet',
+  devCount: '{n} Geräte unterstützt', devOpenList: 'Liste öffnen', devSearch: 'Geräte suchen (z. B. S75, SC900)', devAll: 'Alle', devKeyboard: 'Tastatur', devMouse: 'Maus', devKeyboards: 'Tastaturen', devMice: 'Mäuse', devVerified: 'Getestet', devAwaiting: 'Test ausstehend', devAwaitingHint: '„Test ausstehend“: Das Protokoll stammt aus dem offiziellen Treiber, wurde aber noch nicht an einem echten Gerät ausprobiert.', devRequest: 'Gerät fehlt? Anfragen', devNone: 'Kein Gerät passt zu dieser Suche.',
 };
 
 export const names: Record<string, string> = {
@@ -105,4 +106,5 @@ export const names: Record<string, string> = {
   // variants
   White: 'Weiß', Black: 'Schwarz',
   Steady: 'Konstant', Breathing: 'Atmend', Ember: 'Glut', Cyan: 'Cyan', Green: 'Grün', Purple: 'Violett', Pink: 'Rosa',
+  'Tri-mode keyboard with a 3.5" screen': 'Tri-Mode-Tastatur mit 3,5"-Display',
 };
