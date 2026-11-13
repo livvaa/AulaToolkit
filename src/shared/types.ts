@@ -101,6 +101,8 @@ export interface DeviceModel {
   batteries?: number;
   lightRange?: { brightness: number; speed: number };
   settings?: SettingDef[];
+  /** aula04: byte of each checkbox in the settings payload when it differs from the S75 Pro's. */
+  settingsBytes?: { winLock: number; altF4: number; altTab: number };
   screen?: { width: number; height: number; headLength: number; maxFrames: number; chunk: number };
   buttonSlots?: ButtonSlot[];
   dpi?: { min: number; max: number; step: number; stages: number; defaults: number[] };

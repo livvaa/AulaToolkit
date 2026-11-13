@@ -28,6 +28,8 @@ export const L99: DeviceModel = {
   features: { lighting: true, perkey: true, keymap: true, fnLayer: true, macros: true, settings: true, battery: true, clock: true },
   layout: L99_KEYS,
   bluetoothName: 'L99',
+  // from a USB capture of the official driver (issue #2): Alt+Tab and the Windows key swap places
+  settingsBytes: { winLock: 4, altF4: 3, altTab: 2 },
   barModes: undefined,
   screen: { width: 320, height: 480, headLength: 256, maxFrames: 200, chunk: 4096 },
 };

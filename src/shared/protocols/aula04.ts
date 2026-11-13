@@ -44,9 +44,12 @@ export function barPayload(mode: number): Uint8Array {
   return p;
 }
 
-export function settingsPayload(s: Record<string, number>): Uint8Array {
+export function settingsPayload(s: Record<string, number>, bytes = { winLock: 2, altF4: 3, altTab: 4 }): Uint8Array {
   const p = new Uint8Array(64);
-  p.set([0x00, 0x01, s.winLock ? 1 : 0, s.altF4 ? 1 : 0, s.altTab ? 1 : 0, s.fnSwitch ?? 0, s.sleep ?? 0, 0, s.response ?? 1]);
+  p.set([0x00, 0x01, 0, 0, 0, s.fnSwitch ?? 0, s.sleep ?? 0, 0, s.response ?? 1]);
+  p[bytes.winLock] = s.winLock ? 1 : 0;
+  p[bytes.altF4] = s.altF4 ? 1 : 0;
+  p[bytes.altTab] = s.altTab ? 1 : 0;
   tag(p, 62);
   return p;
 }

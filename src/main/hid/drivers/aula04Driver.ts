@@ -328,7 +328,7 @@ export class Aula04Driver implements Driver {
 
   setSettings(s: Record<string, number>): Promise<void> {
     return this.port.exclusive(async () => {
-      const p = P.settingsPayload(s);
+      const p = P.settingsPayload(s, this.model.settingsBytes);
       if (this.link === '2.4g') { await this.radio(P.dongleShort(P.DONGLE_CMD.SETTINGS, p)); return; }
       await this.cmd(P.OP.BEGIN);
       await this.cmd(P.OP.SETTINGS, 1, 1);
