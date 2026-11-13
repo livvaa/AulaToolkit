@@ -107,4 +107,5 @@ export const names: Record<string, string> = {
   White: '白色', Black: '黑色',
   Steady: '常亮', Breathing: '呼吸', Ember: '余烬', Cyan: '青色', Green: '绿色', Purple: '紫色', Pink: '粉色',
   'Tri-mode keyboard with a 3.5" screen': '三模键盘，配 3.5 英寸屏幕',
+  'Tri-mode gaming mouse with a built-in display': '带显示屏的三模游戏鼠标', 'USB polling rate': 'USB 回报率', '2.4 GHz polling rate': '2.4 GHz 回报率', 'Lift-off distance': '抬起高度', 'Ultra low delay': '超低延迟', 'Ultra low power': '超低功耗', 'Ripple control': '波纹控制', 'Wake up on movement': '移动唤醒', 'Up to 1000 Hz': '最高 1000 Hz',
 };

@@ -48,6 +48,10 @@ async function push(modelId: string, sections: Set<Section>): Promise<void> {
     }
     if (model.kind === 'mouse' && p.mouse) {
       const m = p.mouse;
+      if (model.protocol !== 'incott') {
+        if (has('settings') && m.settings) await s.call(modelId, 'setSettings', m.settings);
+        return;
+      }
       const macros = file?.macros ?? [];
       if (has('macros') || has('buttons')) {
         for (const [, a] of Object.entries(m.buttons)) if (a.type === 'macro' && macros[a.index]) await s.call(modelId, 'uploadMacro', a.index, macros[a.index].steps, a.mode, a.loops ?? 1);

@@ -38,10 +38,10 @@ export const DevicePage = () => {
     { id: 'keys', label: t('keys'), icon: <Keyboard size={16} />, show: !!model.features.keymap },
     { id: 'dpi', label: t('dpi'), icon: <Gauge size={16} />, show: !!model.features.dpi },
     { id: 'buttons', label: t('buttons'), icon: <MousePointer2 size={16} />, show: !!model.features.buttons },
-    { id: 'performance', label: t('performance'), icon: <Settings2 size={16} />, show: model.kind === 'mouse' },
+    { id: 'performance', label: t('performance'), icon: <Settings2 size={16} />, show: model.kind === 'mouse' && model.protocol === 'incott' },
     { id: 'macros', label: t('macros'), icon: <ListVideo size={16} />, show: !!model.features.macros },
     { id: 'screen', label: t('screen'), icon: <Monitor size={16} />, show: !!model.features.screen },
-    { id: 'settings', label: t('kbConfig'), icon: <Settings2 size={16} />, show: model.kind === 'keyboard' && !!model.features.settings },
+    { id: 'settings', label: t('kbConfig'), icon: <Settings2 size={16} />, show: !!model.features.settings && (model.kind === 'keyboard' || model.protocol !== 'incott') },
     { id: 'device', label: t('deviceTab'), icon: <Wrench size={16} />, show: true },
   ];
   const tab: Tab = sel.model === modelId && tabs.some((x) => x.id === sel.tab && x.show) ? sel.tab : 'overview';

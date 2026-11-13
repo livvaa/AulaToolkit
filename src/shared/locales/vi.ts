@@ -107,4 +107,5 @@ export const names: Record<string, string> = {
   White: 'Trắng', Black: 'Đen',
   Steady: 'Tĩnh', Breathing: 'Thở', Ember: 'Than hồng', Cyan: 'Xanh lơ', Green: 'Xanh lá', Purple: 'Tím', Pink: 'Hồng',
   'Tri-mode keyboard with a 3.5" screen': 'Bàn phím ba chế độ với màn hình 3,5"',
+  'Tri-mode gaming mouse with a built-in display': 'Chuột gaming ba chế độ có màn hình', 'USB polling rate': 'Tần số quét USB', '2.4 GHz polling rate': 'Tần số quét 2,4 GHz', 'Lift-off distance': 'Khoảng cách nhấc chuột', 'Ultra low delay': 'Độ trễ siêu thấp', 'Ultra low power': 'Tiêu thụ siêu thấp', 'Ripple control': 'Kiểm soát gợn', 'Wake up on movement': 'Đánh thức khi di chuyển', 'Up to 1000 Hz': 'Tối đa 1000 Hz',
 };

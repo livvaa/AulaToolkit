@@ -105,11 +105,12 @@ export const Flyout = () => {
           // can't read the device over Bluetooth, so no profile
           const profile = s.link === 'bluetooth' ? undefined : file?.profiles.find((p) => p.id === file.activeProfile);
           const live = (s.live ?? {}) as Live;
-          const stages = live.dpiStages ?? profile?.mouse?.dpiStages;
-          const active = live.dpiActive ?? profile?.mouse?.dpiActive;
-          const count = live.dpiCount ?? profile?.mouse?.dpiCount;
+          const mouse = model?.features.dpi ? profile?.mouse : undefined; // mice the app reads DPI from
+          const stages = live.dpiStages ?? mouse?.dpiStages;
+          const active = live.dpiActive ?? mouse?.dpiActive;
+          const count = live.dpiCount ?? mouse?.dpiCount;
           const dpi = stages && active != null ? stages[active] : undefined;
-          const polling = live.polling ?? profile?.mouse?.polling;
+          const polling = live.polling ?? mouse?.polling;
           const light = profile?.keyboard?.lighting;
           const effect = light
             ? light.mode === USER_LIGHT_MODE ? t('perKey') : tn(model?.lightModes?.find((m) => m.mode === light.mode)?.name ?? '')

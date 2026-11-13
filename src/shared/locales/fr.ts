@@ -107,4 +107,5 @@ export const names: Record<string, string> = {
   White: 'Blanc', Black: 'Noir',
   Steady: 'Fixe', Breathing: 'Respiration', Ember: 'Braise', Cyan: 'Cyan', Green: 'Vert', Purple: 'Violet', Pink: 'Rose',
   'Tri-mode keyboard with a 3.5" screen': 'Clavier tri-mode avec écran de 3,5"',
+  'Tri-mode gaming mouse with a built-in display': 'Souris gaming tri-mode avec écran', 'USB polling rate': 'Taux de rapport USB', '2.4 GHz polling rate': 'Taux de rapport 2,4 GHz', 'Lift-off distance': 'Distance de levée', 'Ultra low delay': 'Latence ultra-faible', 'Ultra low power': 'Consommation ultra-faible', 'Ripple control': 'Contrôle d’ondulation', 'Wake up on movement': 'Réveil au mouvement', 'Up to 1000 Hz': 'Jusqu’à 1000 Hz',
 };

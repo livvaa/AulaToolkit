@@ -107,4 +107,5 @@ export const names: Record<string, string> = {
   White: 'Білий', Black: 'Чорний',
   Steady: 'Статичний', Breathing: 'Дихання', Ember: 'Жар', Cyan: 'Бірюзовий', Green: 'Зелений', Purple: 'Фіолетовий', Pink: 'Рожевий',
   'Tri-mode keyboard with a 3.5" screen': 'Трирежимна клавіатура з екраном 3,5"',
+  'Tri-mode gaming mouse with a built-in display': 'Трирежимна ігрова миша з дисплеєм', 'USB polling rate': 'Частота опитування USB', '2.4 GHz polling rate': 'Частота опитування 2,4 ГГц', 'Lift-off distance': 'Висота відриву', 'Ultra low delay': 'Наднизька затримка', 'Ultra low power': 'Наднизьке споживання', 'Ripple control': 'Контроль брижів', 'Wake up on movement': 'Пробудження рухом', 'Up to 1000 Hz': 'До 1000 Гц',
 };

@@ -11,6 +11,7 @@ import type { Driver } from './drivers/types';
 import { Aula04Driver } from './drivers/aula04Driver';
 import { IncottDriver } from './drivers/incottDriver';
 import { G5kbDriver } from './drivers/g5kbDriver';
+import { YxtDriver } from './drivers/yxtDriver';
 import { SimDriver } from './drivers/simDriver';
 import type { DriverEvent } from './drivers/types';
 
@@ -188,6 +189,7 @@ export class DeviceManager extends EventEmitter {
         case 'aula04': return await Aula04Driver.attach(model, devices, ctx);
         case 'incott': return await IncottDriver.attach(model, devices, ctx);
         case 'g5kb': return await G5kbDriver.attach(model, devices, ctx);
+        case 'yxt': return await YxtDriver.attach(model, devices, ctx);
         default: return null;
       }
     } finally {

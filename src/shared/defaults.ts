@@ -27,6 +27,7 @@ export const defaultMouseProfile = (m: DeviceModel): MouseProfile => ({
   receiverLed: 0,
   fireKey: { times: 3, intervalMs: 10 },
   buttons: {},
+  ...(m.settings ? { settings: Object.fromEntries(m.settings.map((s) => [s.key, s.default])) } : {}),
 });
 
 export const newProfile = (m: DeviceModel, name: string): Profile => ({

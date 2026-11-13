@@ -47,7 +47,7 @@ export const DeviceSetup = ({ modelId }: { modelId: string }) => {
   };
 
   const summary: [string, string][] = [];
-  if (prof?.mouse) {
+  if (prof?.mouse && model.features.dpi) {
     summary.push([t('dpi'), `${prof.mouse.dpiStages[prof.mouse.dpiActive] ?? '—'}`], [t('polling'), `${prof.mouse.polling} Hz`], [t('liftOff'), `${prof.mouse.liftOff / 10} mm`], [t('sleep'), `${prof.mouse.sleep} ${t('sec')}`]);
   }
   if (prof?.keyboard) {

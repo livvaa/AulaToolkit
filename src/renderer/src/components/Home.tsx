@@ -64,7 +64,7 @@ export const Home = () => {
               const prof = activeProfile(s, m.id);
               const img = m.variants?.find((v) => v.id === file?.variant)?.image ?? m.image;
               const effect = dev && prof?.keyboard ? (prof.keyboard.lighting.mode === USER_LIGHT_MODE ? t('perKey') : tn(m.lightModes?.find((x) => x.mode === prof.keyboard!.lighting.mode)?.name ?? '')) : null;
-              const dpi = dev && prof?.mouse ? prof.mouse.dpiStages[prof.mouse.dpiActive] : null;
+              const dpi = dev && prof?.mouse && m.features.dpi ? prof.mouse.dpiStages[prof.mouse.dpiActive] : null;
               return (
                 <div key={m.id} className="panel p-5 flex gap-5">
                   <div className="h-28 w-28 shrink-0">

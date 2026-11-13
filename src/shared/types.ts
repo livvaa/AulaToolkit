@@ -2,7 +2,7 @@
 
 export type DeviceKind = 'keyboard' | 'mouse';
 export type Link = 'usb' | '2.4g' | 'bluetooth' | 'none';
-export type ProtocolId = 'aula04' | 'incott' | 'g5kb';
+export type ProtocolId = 'aula04' | 'incott' | 'g5kb' | 'yxt';
 
 export interface UsbId {
   vendorId: number;
@@ -176,6 +176,8 @@ export interface MouseProfile {
   receiverLed: number;
   fireKey: { times: number; intervalMs: number };
   buttons: Record<number, KeyAction>;
+  /** Mice configured through model.settings (not the Incott protocol). */
+  settings?: Record<string, number>;
 }
 
 export interface Profile {

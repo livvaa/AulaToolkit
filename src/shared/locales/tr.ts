@@ -110,4 +110,5 @@ export const names: Record<string, string> = {
   'Sleep after (wireless)': 'Uyku süresi (kablosuz)', Debounce: 'Tuş tepki süresi', '1.5 min': '1,5 dk', '2 min': '2 dk', '3 min': '3 dk', '4 min': '4 dk', '10 min': '10 dk', '15 min': '15 dk', '20 min': '20 dk',
   '75% · 80 keys + knob': '%75 · 80 tuş + düğme', 'RGB · 18 effects': 'RGB · 18 efekt', '75% gasket-mount keyboard with a volume knob and 18 lighting effects': 'Ses düğmeli ve 18 ışık efektli %75 gasket klavye', Ember: 'Kor', Cyan: 'Camgöbeği', Green: 'Yeşil', Purple: 'Mor', Pink: 'Pembe',
   'Tri-mode keyboard with a 3.5" screen': '3,5" ekranlı üç modlu klavye',
+  'Tri-mode gaming mouse with a built-in display': 'Ekranlı üç modlu oyuncu faresi', 'USB polling rate': 'USB yoklama hızı', '2.4 GHz polling rate': '2.4 GHz yoklama hızı', 'Lift-off distance': 'Kaldırma mesafesi (LOD)', 'Ultra low delay': 'Ultra düşük gecikme', 'Ultra low power': 'Ultra düşük güç', 'Ripple control': 'Dalgalanma kontrolü', 'Wake up on movement': 'Hareketle uyan', 'Up to 1000 Hz': '1000 Hz’e kadar',
 };
