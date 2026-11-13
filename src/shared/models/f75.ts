@@ -4,8 +4,8 @@ import { F75_KEYS } from './f75.layout';
 /**
  * AULA F75 — 75% gasket keyboard on the SinoWealth BYCOMBO4 platform.
  * All models of this family share USB 258A:010C; the firmware's 6-byte "password" tells them apart
- * (F75 3-mode: 03 00 00 00 00 CD, F75 wired: 03 00 00 00 00 E1). The 2.4 GHz dongle (3554:FA09)
- * speaks a different, undocumented protocol, so configuration is USB only.
+ * (F75 3-mode: 03 00 00 00 00 CD, F75 wired: 03 00 00 00 00 E1). The official driver (KB.ini VID_Wireless /
+ * PID_Wireless) drives the 2.4 GHz dongle 3554:FA09 with the same CDevG5KB code, so the same commands.
  */
 export const F75: DeviceModel = {
   id: 'f75',
@@ -13,7 +13,10 @@ export const F75: DeviceModel = {
   brand: 'AULA',
   kind: 'keyboard',
   protocol: 'g5kb',
-  usb: [{ vendorId: 0x258a, productId: 0x010c, role: 'usb', usagePage: 0xff00 }],
+  usb: [
+    { vendorId: 0x258a, productId: 0x010c, role: 'usb', usagePage: 0xff00 },
+    { vendorId: 0x3554, productId: 0xfa09, role: 'dongle', usagePage: 0xff00 },
+  ],
   image: 'f75',
   topImage: { id: 'f75-top', width: 679, height: 284 },
   tagline: '75% gasket-mount keyboard with a volume knob and 18 lighting effects',

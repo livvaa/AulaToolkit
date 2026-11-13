@@ -1,4 +1,4 @@
-// Transport + sequencing for the SinoWealth BYCOMBO4 keyboard protocol (AULA F75 family). USB only.
+// Transport + sequencing for the SinoWealth BYCOMBO4 keyboard protocol (AULA F75 family). USB cable or 2.4 GHz dongle.
 import type { Device } from 'node-hid';
 import type { DeviceModel, DeviceStatus, KeyAction, KeyDef, LightingState, Link, Macro } from '@shared/types';
 import * as P from '@shared/protocols/g5kb';
@@ -10,12 +10,11 @@ type Effects = { mode: number; hw: number }[];
 
 export class G5kbDriver implements Driver {
   readonly key: string;
-  readonly link: Link = 'usb';
   private macros: Macro[] = [];
   private password = '';
 
-  private constructor(readonly model: DeviceModel, private port: HidPort, private ctx: DriverContext) {
-    this.key = `${model.id}:usb`;
+  private constructor(readonly model: DeviceModel, private port: HidPort, private ctx: DriverContext, readonly link: Link) {
+    this.key = `${model.id}:${link}`;
   }
 
   get productName(): string { return this.port.info.product ?? this.model.name; }
@@ -24,18 +23,20 @@ export class G5kbDriver implements Driver {
   private get keys(): (KeyDef & { def: number[] })[] { return (this.model.layout ?? []) as (KeyDef & { def: number[] })[]; }
 
   static async attach(model: DeviceModel, devices: Device[], ctx: DriverContext): Promise<G5kbDriver | null> {
-    const cands = devices
-      .filter((d) => model.usb.some((u) => u.vendorId === d.vendorId && u.productId === d.productId))
-      .sort((a, b) => ((a.usagePage ?? 0) === 0xff00 ? 0 : 1) - ((b.usagePage ?? 0) === 0xff00 ? 0 : 1));
+    const role = (d: Device): 'usb' | 'dongle' | undefined => model.usb.find((u) => u.vendorId === d.vendorId && u.productId === d.productId)?.role as 'usb' | 'dongle' | undefined;
+    // cable first, then the vendor page (0xff00) before the other interfaces
+    const rank = (d: Device): number => (role(d) === 'usb' ? 0 : 2) + ((d.usagePage ?? 0) === 0xff00 ? 0 : 1);
+    const cands = devices.filter((d) => role(d)).sort((a, b) => rank(a) - rank(b));
     for (const d of cands) {
       let port: HidPort | null = null;
       try {
         port = await HidPort.open(d);
-        const drv = new G5kbDriver(model, port, ctx);
+        const link: Link = role(d) === 'dongle' ? '2.4g' : 'usb';
+        const drv = new G5kbDriver(model, port, ctx, link);
         const pw = await drv.read(P.CMD.INFO, 1, 6).catch(() => null);
         if (!pw) { await port.close(); continue; }
         drv.password = hex(pw);
-        ctx.log('i', `${model.name} attached over USB (id ${drv.password})`);
+        ctx.log('i', `${model.name} attached over ${link === 'usb' ? 'USB' : '2.4G'} (id ${drv.password})`);
         return drv;
       } catch { await port?.close(); }
     }
@@ -43,7 +44,7 @@ export class G5kbDriver implements Driver {
   }
 
   async status(): Promise<DeviceStatus> {
-    return { key: this.key, modelId: this.model.id, link: 'usb', productName: this.productName, battery: null, charging: false, firmware: this.password };
+    return { key: this.key, modelId: this.model.id, link: this.link, productName: this.productName, battery: null, charging: false, firmware: this.password };
   }
 
   async call(method: string, args: unknown[]): Promise<unknown> {
