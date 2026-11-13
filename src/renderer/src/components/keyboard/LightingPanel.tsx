@@ -158,7 +158,7 @@ export const LightingPanel = ({ modelId }: { modelId: string }) => {
         <Card title={t('effect')}>
           {animating && <p className="text-xs text-muted mb-3">{t('keyAnimActive')}</p>}
           <div className="flex flex-wrap gap-1.5">
-            {[...modes, { mode: USER_LIGHT_MODE, name: t('perKey'), caps: 1 }].map((m) => (
+            {[...modes, ...(model.features.perkey ? [{ mode: USER_LIGHT_MODE, name: t('perKey'), caps: 1 }] : [])].map((m) => (
               <button
                 key={m.mode}
                 onClick={() => setL({ mode: m.mode })}
