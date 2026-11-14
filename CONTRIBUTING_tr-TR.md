@@ -17,7 +17,7 @@ _Bu kurallara uymayan konular ayrıca haber verilmeden kapatılabilir._
 
 **2. Daha önce bildirilen sorunlara bak**
 
-Önceden açılmış [konuları](https://github.com/Livvaa/aula-toolkit/issues?q=is%3Aissue) incele. Aynı konuyu tekrar açma. Konu kapatılmış olsa bile altına yorum yazabilirsin. Bilinen sorunları [Discord sunucumuzda](https://discord.gg/u9FbaJGtCe) da konuşabilirsin.
+Önceden açılmış [konuları](https://github.com/livvaa/AulaToolkit/issues?q=is%3Aissue) incele. Aynı konuyu tekrar açma. Konu kapatılmış olsa bile altına yorum yazabilirsin. Bilinen sorunları [Discord sunucumuzda](https://discord.gg/u9FbaJGtCe) da konuşabilirsin.
 
 **3. İngilizce veya Türkçe yaz**
 
@@ -71,8 +71,8 @@ Pull request'ler memnuniyetle karşılanır. Değişiklik küçük ve açık de�
 Windows 10 veya 11, [Node.js](https://nodejs.org/) 22 LTS ve [Git](https://git-scm.com/) gerekir.
 
 ```bash
-git clone https://github.com/Livvaa/aula-toolkit.git
-cd aula-toolkit
+git clone https://github.com/livvaa/AulaToolkit.git
+cd AulaToolkit
 npm install
 npm run dev
 ```

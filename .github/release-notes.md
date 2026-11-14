@@ -51,4 +51,4 @@
 - The AULA F75 and SC900 versions other than the Pro have not been tested on hardware yet.
 - Close the official AULA software while using AULA Toolkit.
 
-Problems or ideas? [Open an issue](https://github.com/Livvaa/aula-toolkit/issues) or join the [Discord server](https://discord.gg/u9FbaJGtCe).
+Problems or ideas? [Open an issue](https://github.com/livvaa/AulaToolkit/issues) or join the [Discord server](https://discord.gg/u9FbaJGtCe).

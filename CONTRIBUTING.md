@@ -17,7 +17,7 @@ The [README](README.md) answers the most common questions in its [FAQ](README.md
 
 **2. Check already reported issues**
 
-Go through the [issues](https://github.com/Livvaa/aula-toolkit/issues?q=is%3Aissue) that were already reported. Do not create duplicates. Even if an issue is closed, you can still leave a comment there. You can also talk about known issues on our [Discord server](https://discord.gg/u9FbaJGtCe).
+Go through the [issues](https://github.com/livvaa/AulaToolkit/issues?q=is%3Aissue) that were already reported. Do not create duplicates. Even if an issue is closed, you can still leave a comment there. You can also talk about known issues on our [Discord server](https://discord.gg/u9FbaJGtCe).
 
 **3. Use English or Turkish**
 
@@ -71,8 +71,8 @@ Pull requests are welcome. Unless the change is small and obvious, open an issue
 You need Windows 10 or 11, [Node.js](https://nodejs.org/) 22 LTS and [Git](https://git-scm.com/).
 
 ```bash
-git clone https://github.com/Livvaa/aula-toolkit.git
-cd aula-toolkit
+git clone https://github.com/livvaa/AulaToolkit.git
+cd AulaToolkit
 npm install
 npm run dev
 ```
