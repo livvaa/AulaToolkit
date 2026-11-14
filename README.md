@@ -4,17 +4,17 @@
     <img height="88" src="docs/brand/wordmark-light.png" alt="AULA Toolkit">
   </picture>
 
-  [![Latest Release](https://img.shields.io/github/v/release/Livvaa/aula-toolkit?include_prereleases&logo=github&logoColor=white&color=blue&label=version)](https://github.com/Livvaa/aula-toolkit/releases)
-  [![Release Date](https://img.shields.io/github/release-date-pre/Livvaa/aula-toolkit?logo=github&logoColor=white&label=updated)](https://github.com/Livvaa/aula-toolkit/releases)
-  [![Downloads](https://img.shields.io/github/downloads/Livvaa/aula-toolkit/total?color=brightgreen)](https://github.com/Livvaa/aula-toolkit/releases)
+  [![Latest Release](https://img.shields.io/github/v/release/livvaa/AulaToolkit?include_prereleases&logo=github&logoColor=white&color=blue&label=version)](https://github.com/livvaa/AulaToolkit/releases)
+  [![Release Date](https://img.shields.io/github/release-date-pre/livvaa/AulaToolkit?logo=github&logoColor=white&label=updated)](https://github.com/livvaa/AulaToolkit/releases)
+  [![Downloads](https://img.shields.io/github/downloads/livvaa/AulaToolkit/total?color=brightgreen)](https://github.com/livvaa/AulaToolkit/releases)
   <br>
-  [![Platform](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011-0078D6?logo=windows&logoColor=white)](https://github.com/Livvaa/aula-toolkit)
+  [![Platform](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011-0078D6?logo=windows&logoColor=white)](https://github.com/livvaa/AulaToolkit)
   [![Electron](https://img.shields.io/badge/Electron-React%20%2B%20TypeScript-47848F?logo=electron&logoColor=white)](https://www.electronjs.org/)
-  [![Architecture](https://img.shields.io/badge/Arch-x64-informational?logo=intel&logoColor=white)](https://github.com/Livvaa/aula-toolkit)
+  [![Architecture](https://img.shields.io/badge/Arch-x64-informational?logo=intel&logoColor=white)](https://github.com/livvaa/AulaToolkit)
   [![License](https://img.shields.io/badge/License-GPLv3-informational?logo=gnu&logoColor=white)](LICENSE)
   <br>
-  [![GitHub Stars](https://img.shields.io/github/stars/Livvaa/aula-toolkit?logo=github&style=flat)](https://github.com/Livvaa/aula-toolkit/stargazers)
-  [![Contributors](https://img.shields.io/github/contributors/Livvaa/aula-toolkit?logo=github)](https://github.com/Livvaa/aula-toolkit/graphs/contributors)
+  [![GitHub Stars](https://img.shields.io/github/stars/livvaa/AulaToolkit?logo=github&style=flat)](https://github.com/livvaa/AulaToolkit/stargazers)
+  [![Contributors](https://img.shields.io/github/contributors/livvaa/AulaToolkit?logo=github)](https://github.com/livvaa/AulaToolkit/graphs/contributors)
   [![Discord](https://img.shields.io/badge/Discord-join-5865F2?logo=discord&logoColor=white)](https://discord.gg/u9FbaJGtCe)
 </div>
 
@@ -26,8 +26,7 @@
 > - Only some devices have been tested on real hardware; see [Compatibility](#compatibility).
 
 #### Other language versions of this README file:
-* [Türkçe README](README_tr-TR.md)
-* [Русский README](README_ru-RU.md)
+[Türkçe](README_tr-TR.md) · [Русский](README_ru-RU.md) · [简体中文](README_zh-CN.md) · [Українська](README_uk-UA.md) · [Tiếng Việt](README_vi-VN.md) · [Português (Brasil)](README_pt-BR.md) · [Español](README_es-ES.md) · [Deutsch](README_de-DE.md) · [Français](README_fr-FR.md)
 
 ---
 
@@ -78,7 +77,7 @@ AULA Toolkit talks to your devices with protocols that were reverse-engineered f
 
 ## Download
 
-[![Download](https://img.shields.io/badge/Download-Latest%20Installer-success?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/Livvaa/aula-toolkit/releases)
+[![Download](https://img.shields.io/badge/Download-Latest%20Installer-success?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/livvaa/AulaToolkit/releases)
 
 Two builds are published with every release:
 * **Installer** — installs for the current user only, so no administrator rights are needed.
@@ -89,14 +88,14 @@ Two builds are published with every release:
 AULA Toolkit can update itself. Configure it in **Settings → Updates**:
 * **Channel** — **Stable** or **Beta** releases.
 * **Check frequency** — from every hour to monthly, or never.
-* **Download and install updates automatically** — updates download in the background and install when you close the app. You can also install them right away.
+* **Download and install updates automatically** — updates download in the background and install quietly while you are away from the PC (or when you close the app). You can also install them right away.
 
 Installing a new version over an existing one keeps your settings, profiles and macros.
 
 #### Next steps
 
 AULA Toolkit works best when it runs in the tray. In **Settings → General**:
-1. Set **Autorun** to *Enabled* (or *Enabled (delayed)* to start 30 seconds after sign-in).
+1. Set **Autorun** to *Enabled* (or *Enabled (delayed)* to start 30 seconds after sign-in). AULA Toolkit starts through a Windows scheduled task, so it also starts on battery power; the task is checked every time the app starts and recreated if it was removed.
 2. Turn on **Minimise to tray on close**.
 3. In **Settings → Software control**, turn on **Disable official AULA software** so the AULA drivers do not fight AULA Toolkit over the same device.
 
@@ -108,9 +107,13 @@ AULA Toolkit works best when it runs in the tray. In **Settings → General**:
 | Device | Connection | Status |
 |---|---|---|
 | **AULA S75 Pro** | USB, 2.4 GHz receiver, Bluetooth (status and battery) | ✅ Tested on hardware |
+| **AULA L99** | USB, 2.4 GHz receiver, Bluetooth (status and battery) | 🧪 Beta, being tested by users |
 | **AULA SC900 Pro** | USB, 2.4 GHz receiver, Bluetooth (status and battery) | ✅ Tested on hardware |
 | **AULA SC900** (other versions that use the SC900 Pro driver) | USB, 2.4 GHz receiver | ⚠️ Recognised, not yet tested on hardware |
-| **AULA F75** | USB | ⚠️ Recognised, not yet tested on hardware |
+| **AULA SC390** | USB | 🧪 Beta, being tested by users |
+| **AULA F75** | USB, 2.4 GHz receiver | ⚠️ Recognised, not yet tested on hardware |
+
+Beta devices are supported from USB captures of the official driver that their owners sent in. Some features are still missing; see the table below.
 
 AULA sells the same mouse in several colours under one USB ID, so AULA Toolkit cannot tell them apart. Pick your colour during device setup or in the device's **Device** tab.
 
@@ -118,21 +121,35 @@ Your AULA device is not on the list? It may still use one of the protocols above
 
 #### What works over which connection
 
-| Feature | S75 Pro · USB | S75 Pro · 2.4 GHz | SC900 Pro · USB / 2.4 GHz | F75 · USB |
-|---|:---:|:---:|:---:|:---:|
-| Lighting effects | ✅ | ✅ | — | ✅ |
-| Per-key lighting | ✅ | ✅ | — | — |
-| Music rhythm and animation on the keys (streamed from the PC) | ✅ | — | — | — |
-| Lights off while the monitor is off | ✅ | ✅ | — | — |
-| Live keyboard view, knob / Fn changes followed | ✅ | — | — | — |
-| Key mapping, Fn layer, macros | ✅ | ✅ | — | ✅ |
-| Keyboard settings (Win lock, sleep, debounce) | ✅ | ✅ | — | ✅ |
-| TFT screen and clock (synced on connect) | ✅ | Clock only | — | — |
-| Side light bar | ✅ | ✅ | — | — |
-| DPI, polling rate, sensor, buttons, macros | — | — | ✅ | — |
-| Battery level | — | ✅ | ✅ | — |
-| Settings read back when connecting | — | — | ✅ | ✅ |
-| On-screen display for changes made on the device | ✅ | — | ✅ (DPI button) | — |
+**Keyboards**
+
+| Feature | S75 Pro · USB | S75 Pro · 2.4 GHz | L99 · USB | L99 · 2.4 GHz | F75 · USB / 2.4 GHz |
+|---|:---:|:---:|:---:|:---:|:---:|
+| Lighting effects | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Per-key lighting | ✅ | ✅ | ✅ | ✅ | — |
+| Music rhythm and animation on the keys (streamed from the PC) | ✅ | — | ✅ | — | — |
+| Lights off while the monitor is off | ✅ | ✅ | — | — | — |
+| Live keyboard view, knob / Fn changes followed | ✅ | — | — | — | — |
+| Key mapping, Fn layer, macros | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Keyboard settings (Win lock, sleep, debounce) | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Screen | ✅ TFT | — | Coming | — | — |
+| Clock (synced on connect) | ✅ | ✅ | ✅ | ✅ | — |
+| Side light bar | ✅ | ✅ | — | — | — |
+| Battery level | — | ✅ | — | ✅ | — |
+| Settings read back when connecting | — | — | — | — | ✅ |
+
+**Mice**
+
+| Feature | SC900 Pro · USB / 2.4 GHz | SC390 · USB |
+|---|:---:|:---:|
+| DPI stages and DPI indicator | ✅ | Coming |
+| Polling rate | ✅ up to 8000 Hz | ✅ up to 1000 Hz (cable and receiver) |
+| Sensor (lift-off distance, ripple control and more) | ✅ | ✅ |
+| Buttons and macros | ✅ | Coming |
+| Sleep time | ✅ | Coming |
+| Battery level | ✅ | — |
+| Settings read back when connecting | ✅ | ✅ |
+| On-screen display for the DPI button | ✅ | — |
 
 > [!NOTE]
 > Devices can only be configured over **USB** or the **2.4 GHz receiver**. Over Bluetooth the device does not expose its configuration interface — the official AULA software has the same limitation. Settings you saved earlier keep working over Bluetooth, and AULA Toolkit still shows the device as connected there, with the battery level Windows reports.
@@ -176,8 +193,8 @@ The app allows you to:
 ### Mice
 
 * **DPI** — up to six stages, the active stage, the number of stages in the cycle and the DPI indicator LED.
-* **Polling rate** — up to 8000 Hz. Rates above 1000 Hz need the 2.4 GHz receiver.
-* **Sensor** — lift-off distance, motion sync, angle snapping, ripple control and sensor mode.
+* **Polling rate** — up to 8000 Hz. Rates above 1000 Hz need the 2.4 GHz receiver. On the SC390 the cable and the receiver have separate rates.
+* **Sensor** — lift-off distance, motion sync, angle snapping, ripple control and sensor mode. On the SC390: lift-off distance, Ultra Low Delay, Ultra Low Power, Ripple Control and Move WakeUp.
 * **Buttons** — remap any button except left click, including rapid fire and macros.
 * **Timing** — click debounce and sleep time.
 * **Battery** — level and charging state. The SC900 Pro's two batteries (and any extra ones you add) are tracked separately.
@@ -192,13 +209,13 @@ When you change the DPI with the mouse's own button, a small indicator appears o
 
 ### Battery statistics
 
-Turn on **Settings → General → Battery statistics** to see a battery card in each device's overview:
+**Settings → General → Battery statistics** (on by default) shows a battery card in each device's overview:
 
 * **Level** — the current level, or the last one with how long ago it was read. On the cable without a reading, an estimate and then 99+.
 * **1 % in use** — how long 1 % lasts while the device is in use on the receiver.
 * **Daily drain** and **time left** — over calendar time, including the hours it sleeps or the app is closed.
 * **Full charge** and **health** — from how fast the battery charges in the middle of its range.
-* **Equivalent cycles**, **last full charge** and a chart of the level over time.
+* **Equivalent cycles**, **last full charge** and a chart with three views: the last 24 hours, battery used per day over 10 days, and the level over 30 days. Hover the chart for exact values; charging is shown in green.
 
 Figures are shown with a range, once enough has been recorded. Levels are recorded over USB, the 2.4 GHz receiver and Bluetooth (read from Windows). **Battery care**, on by default with the statistics, reminds you at 80 % while charging to unplug the device.
 
@@ -210,7 +227,7 @@ Figures are shown with a range, once enough has been recorded. Levels are record
 
 ### CLI
 
-You can control AULA Toolkit from the command line. The command is called `aula` and is installed in `resources\bin` inside the install folder (by default `%LOCALAPPDATA%\Programs\AULA Toolkit\resources\bin\aula.cmd`). Add that folder to your `PATH` to call it from anywhere. **Settings → General → Command line** shows the exact path with a copy button.
+You can control AULA Toolkit from the command line. The command is called `aula` and is installed in `resources\bin` inside the install folder (by default `%LOCALAPPDATA%\Programs\AULA Toolkit\resources\bin\aula.cmd`). The installed app adds that folder to your user `PATH` by itself, so `aula` works in any new terminal; uninstalling removes it again. The portable build does not change `PATH`. **Settings → General → Command line** shows the exact path with a copy button.
 
 The command talks to the running app. If AULA Toolkit is not running, `aula` starts it in the tray first. It does not need administrator rights.
 
@@ -263,6 +280,10 @@ The interface is available in 10 languages. Not all translations have been revie
 
 ## FAQ
 
+#### Can AULA Toolkit damage my device?
+
+AULA Toolkit never touches the firmware. It only sends the same configuration commands as the official driver (lighting, keys, macros, DPI and so on), checked against USB captures of that driver. If something looks wrong, the device's reset in the **Device** tab or the official software brings back the defaults.
+
 #### Why can't I change settings over Bluetooth?
 
 Over Bluetooth the keyboard and mouse only appear to Windows as a standard keyboard and mouse. The configuration interface that USB and the 2.4 GHz receiver provide does not exist there, so neither AULA Toolkit nor the official software can change settings. Connect with the cable or the receiver, make your changes, and switch back to Bluetooth — the settings stay on the device. Over Bluetooth AULA Toolkit shows the connection and the battery level that Windows reports.
@@ -294,7 +315,7 @@ Possibly. Most AULA keyboards and mice reuse one of the protocol families AULA T
 ## Arguments
 
 * `--hidden` — start minimised to the tray. Used by *Autorun*.
-* `--delayed` — wait 30 seconds before connecting to devices. Used by *Autorun → Enabled (delayed)*.
+* `--delayed` — wait 30 seconds before connecting to devices. *Autorun → Enabled (delayed)* now waits in the scheduled task instead.
 
 ## How to collect logs?
 
@@ -326,6 +347,7 @@ Support for more AULA devices needs testers. When you open a request, please inc
 2. The USB IDs, found in **Device Manager → your device → Details → Hardware Ids** (for example `VID_0C45&PID_800A`).
 3. Which connection you used (USB or 2.4 GHz).
 4. A diagnostics bundle (see [How to collect logs?](#how-to-collect-logs)).
+5. If you can: a USB capture of the official driver. Install [Wireshark](https://www.wireshark.org/download.html) with USBPcap, close AULA Toolkit, start capturing, change one setting at a time in the official driver and write down the order. Attach the `.pcapng` file zipped. This is how the L99 and SC390 were added.
 
 ## License
 
