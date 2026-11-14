@@ -31,8 +31,9 @@ export const BatteryCard = ({ modelId }: { modelId: string }) => {
   const pct = (v: number, digits = 0): string => (v / 100).toLocaleString(locale, { style: 'percent', maximumFractionDigits: digits });
   const dur = (minutes: number): string => {
     if (minutes >= 48 * 60) return `${num(minutes / 1440, 0)} ${t('days')}`;
-    if (minutes >= 60) { const h = Math.floor(minutes / 60), m = Math.round(minutes % 60); return m ? `${h} ${t('hours')} ${m} ${t('min')}` : `${h} ${t('hours')}`; }
-    return `${Math.max(1, Math.round(minutes))} ${t('min')}`;
+    const total = Math.max(1, Math.round(minutes)); // round first, so 59.6 min is 1 h, not "60 min"
+    if (total >= 60) { const h = Math.floor(total / 60), m = total % 60; return m ? `${h} ${t('hours')} ${m} ${t('min')}` : `${h} ${t('hours')}`; }
+    return `${total} ${t('min')}`;
   };
   const range = (e: Estimate, f: (v: number) => string): string => `${f(e.lo)} – ${f(e.hi)}`;
   const collecting = t('batteryCollecting');

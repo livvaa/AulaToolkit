@@ -34,7 +34,7 @@ export const Home = () => {
               ? connected.map((m) => {
                 const d = s.devices.find((x) => x.modelId === m.id);
                 return `${s.settings[m.id]?.nickname || m.name} · ${d ? (d.link === 'usb' ? t('usb') : t('wireless')) : t('bluetooth')}`;
-              }).join('   ')
+              }).join(', ')
               : t('noDevices')}
           </p>
         </div>
